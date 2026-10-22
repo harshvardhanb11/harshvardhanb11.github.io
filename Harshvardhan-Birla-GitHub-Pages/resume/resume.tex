@@ -1,0 +1,107 @@
+%-------------------------
+% Resume
+% Author: Harshvardhan Birla
+% Based on the author's supplied LaTeX; wording preserved.
+% Formatting-only fixes: pasted escapes, spacing, duplicate skills row.
+% Added the Distributed Compute Orchestration Platform from the supplied resume.
+%-------------------------
+\documentclass[letterpaper,10pt]{article}
+\renewcommand{\rmdefault}{bch}
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.74in}
+\addtolength{\textheight}{1.47in}
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+\titleformat{\section}{\vspace{-6pt}\scshape\raggedright\large}{}{0em}{}[\color{black}\titlerule\vspace{-6pt}]
+\pdfgentounicode=1
+\hypersetup{pdftitle={Harshvardhan Birla - Resume},pdfauthor={Harshvardhan Birla},pdfsubject={Software Engineering Resume}}
+\newcommand{\resumeItem}[1]{\item\small{{#1\vspace{-2pt}}}}
+\newcommand{\resumeSubheading}[4]{\vspace{-2pt}\item\begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}\textbf{#1} & #2 \\\textit{\footnotesize#3} & \textit{\footnotesize#4} \\\end{tabular*}\vspace{-7pt}}
+\newcommand{\resumeProjectHeading}[2]{\item\begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}\small\textbf{#1} & \small#2 \\\end{tabular*}\vspace{-7pt}}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.12in,label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.18in]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-8pt}}
+\begin{document}
+\begin{center}
+\textbf{\Huge\scshape Harshvardhan Birla}\\\vspace{2pt}
+\small +91-8780667597 $|$ \href{mailto:harshvardhanb11@gmail.com}{\underline{harshvardhanb11@gmail.com}} $|$ \href{https://www.linkedin.com/in/harshvardhan-birla-160a31230}{\underline{LinkedIn}} $|$ \href{https://github.com/harshvardhanb11}{\underline{GitHub}}
+\end{center}
+\vspace{-5pt}
+\section{Experience}
+\resumeSubHeadingListStart
+\resumeSubheading{Oracle}{Bengaluru, India}{Software Engineer, Database Security Team}{Jan 2025 -- Present}
+\resumeItemListStart
+\resumeItem{Resolved \textbf{100+} customer-reported and internally detected production defects in C-based Oracle RDBMS infrastructure, including memory corruption, null-pointer crashes, stack-buffer overflows, ORA-07445/ORA-00600 failures, and reliability regressions using GDB, core dumps, trace files, and internal diagnostic tooling.}
+\resumeItem{Designed and implemented an enhancement to \textbf{Oracle Label Security (OLS)}, expanding supported label capacity by \textbf{8x} from \texttt{VARCHAR2(4000)} to \texttt{VARCHAR2(32000)} to support larger organizations requiring security labels with more groups and compartments while preserving database-level access-control behavior.}
+\resumeItem{Fixed \textbf{40+} security-critical defects across multiple RDBMS subsystems, including heap overwrites, format-string vulnerabilities, uninitialized-memory defects, and SQL/LDAP injection exposure.}
+\resumeItem{Owned engineering and investigation work across Oracle Label Security and password-file components, covering access-control flows, authentication, role systems, session state, and client--database consistency mechanisms.}
+\resumeItem{Drove cross-version feature integration from Oracle 26ai/23c to 19c, adapting low-level database internals while maintaining backward compatibility and consistent behavior across database releases.}
+\resumeItemListEnd
+\resumeSubheading{iQuadra Information Services Pvt. Ltd}{Remote}{Machine Learning Intern}{May 2023 -- Jul 2023}
+\resumeItemListStart
+\resumeItem{Fine-tuned a RoBERTa-based sentiment model and developed computer-vision pipelines for candidate assessment, improving interview evaluation accuracy by \textbf{35\%}.}
+\resumeItemListEnd
+\resumeSubHeadingListEnd
+\section{Projects}
+\resumeSubHeadingListStart
+\resumeProjectHeading{Distributed Storage Engine $|$ \emph{Apache Kafka, Replication, Fault Tolerance}}{Jul 2023 -- Nov 2023}
+\resumeItemListStart
+\resumeItem{Architected a multi-node distributed storage system using Apache Kafka for scalable ingestion, partitioned inter-node communication, and durable data movement.}
+\resumeItem{Implemented replicated metadata and dual-storage fault-tolerance mechanisms, enabling continued data access and recovery during tested single-node failure scenarios.}
+\resumeItem{Optimized inter-node communication and concurrent processing through Kafka topic partitioning and parallel consumers, reducing transfer latency and improving throughput.}
+\resumeItemListEnd
+\resumeProjectHeading{Live Snapshot Prune $|$ \emph{Python, PostgreSQL, Docker, Distributed Storage}}{2026}
+\resumeItemListStart
+\resumeItem{Designed a backup storage system with transactional PostgreSQL metadata, independent object storage, snapshot APIs, and online mark-and-sweep garbage collection running alongside concurrent uploads, restores, and deletions.}
+\resumeItem{Designed correctness mechanisms that distinguish logical content identity from physical object incarnations, preventing delayed delete operations from removing newly uploaded deduplicated data during ABA-style races.}
+\resumeItem{Built a fault-injection verifier covering lost acknowledgements, process crashes, restart recovery, concurrent operations, orphan reclamation, and end-state invariant validation across multiple services.}
+\resumeItemListEnd
+\resumeProjectHeading{Low-Latency C++ Event Processing Engine $|$ \emph{C++17, Multithreading, Lock-Free Queue, SQLite}}{Jul 2025}
+\resumeItemListStart
+\resumeItem{Built a modular C++17 event-processing backend with live and replayable data sources, circuit-breaker-based provider fault handling, explainable alerts, and SQLite-backed persistence paths.}
+\resumeItem{Implemented lock-free inter-thread event handoff and benchmarked the in-memory processing path at \textbf{8.37M events/sec} with \textbf{10.9$\mu$s p99} local decision latency.}
+\resumeItem{Developed a reproducible validation workflow covering unit tests, deterministic replay, threshold-sweep backtesting, latency benchmarks, labeled failure scenarios, and circuit-breaker state transitions.}
+\resumeItemListEnd
+\resumeProjectHeading{Distributed Compute Orchestration Platform $|$ \emph{HDFS, Redis, ZooKeeper}}{Dec 2023 -- Apr 2024}
+\resumeItemListStart
+\resumeItem{Engineered distributed execution infrastructure for scalable multi-node task orchestration with fault-tolerant coordination and distributed state management.}
+\resumeItem{Integrated HDFS for durable storage, Redis for low-latency state and cache access, and ZooKeeper for distributed coordination across worker nodes.}
+\resumeItem{Designed optimized data pipelines to reduce inter-component latency and improve the reliability of distributed workflow execution.}
+\resumeItemListEnd
+\resumeSubHeadingListEnd
+\section{Technical Skills}
+\resumeSubHeadingListStart
+\item\small{\textbf{Languages:} C++, C, Python, Java, SQL, PL/SQL \\
+\textbf{Data \& Infrastructure:} Oracle RDBMS, PostgreSQL, Apache Kafka, ZooKeeper, Redis, HDFS, SQLite \\
+\textbf{Systems:} Distributed Systems, Storage Systems, Database Systems, Concurrency, Multithreading, Fault Tolerance, High Availability, Low-Latency Systems, Data Structures \& Algorithms \\
+\textbf{Tools:} Linux, GDB, Docker, Git, CMake, Gradle, Shell Scripting, REST}
+\resumeSubHeadingListEnd
+\section{Education}
+\resumeSubHeadingListStart
+\resumeSubheading{BITS Pilani, Goa Campus}{Goa, India}{B.E. (Hons.) in Computer Science, \textbf{CGPA: 8.7}}{2021 -- 2025}
+\resumeItemListStart
+\resumeItem{Relevant Coursework: Operating Systems, Distributed Systems, Database Systems, Computer Networks, Object-Oriented Programming, and Design and Analysis of Algorithms}
+\resumeItemListEnd
+\resumeSubHeadingListEnd
+\section{Achievements}
+\resumeSubHeadingListStart
+\item\small{\textbf{NTSE Scholar:} Awarded to the \textbf{Top 1000} students across India \hspace{8pt} $|$ \hspace{8pt} \textbf{JEE Mains:} 99.69 percentile \hspace{8pt} $|$ \hspace{8pt} \textbf{JEE Advanced:} AIR 3547}
+\resumeSubHeadingListEnd
+\end{document}

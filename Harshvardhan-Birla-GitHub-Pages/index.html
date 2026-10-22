@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101815" />
+    <meta
+      name="description"
+      content="Harshvardhan Birla, software engineer on Oracle’s Database Security team. Projects in distributed storage, C++, concurrency, and applied machine learning."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Harshvardhan Birla — Software Engineer" />
+    <meta
+      property="og:description"
+      content="Software engineer at Oracle. Explore my projects in distributed storage, C++, concurrency, and applied machine learning."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>Harshvardhan Birla — Software Engineer</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="content.js" defer=""></script>
+    <script src="glossary.js" defer=""></script>
+    <script src="decisions.js" defer=""></script>
+    <script src="render.js" defer=""></script>
+    <script src="app.js" defer=""></script>
+    <script src="lab-core.js" defer=""></script>
+    <script src="labs.js" defer=""></script>
+    <script src="visuals.js" defer=""></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Harshvardhan Birla",
+        "jobTitle": "Software Engineer",
+        "worksFor": { "@type": "Organization", "name": "Oracle" },
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "BITS Pilani, Goa Campus" },
+        "sameAs": [
+          "https://github.com/harshvardhanb11",
+          "https://www.linkedin.com/in/harshvardhan-birla-160a31230"
+        ],
+        "knowsAbout": ["Database security", "Distributed systems", "C++", "Storage systems"]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#work">Skip to work</a>
+    <div class="reading-progress" aria-hidden="true"><span id="page-progress"></span></div>
+    <header class="site-header">
+      <a class="wordmark" href="#home" aria-label="Harshvardhan Birla home">
+        <svg class="brand-symbol" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <rect x="1" y="1" width="62" height="62" rx="12"></rect>
+          <path
+            d="M14 17v30m16-30v30M14 32h16m10-15v30h7a7.5 7.5 0 0 0 0-15h-7m0-15h6a7.5 7.5 0 0 1 0 15"
+          ></path>
+        </svg>
+        <span class="wordmark-name">Harshvardhan<br /><b>Birla</b></span>
+      </a>
+      <nav class="desktop-nav" aria-label="Primary">
+        <a href="#work">Projects</a><a href="#about">Experience</a><a href="#contact">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button
+          class="icon-button"
+          id="theme-toggle"
+          aria-label="Switch to light theme"
+          title="Change color theme"
+        >
+          ◐</button
+        ><a class="contact-nav" href="resume/resume.pdf" target="_blank" rel="noopener"
+          >Resume <span>↗</span></a
+        ><button
+          class="icon-button mobile-menu"
+          id="menu-toggle"
+          aria-label="Open navigation"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+      </div>
+    </header>
+    <div class="mobile-nav" id="mobile-nav" hidden="">
+      <a href="#work">Projects</a><a href="#about">Experience</a
+      ><a href="resume/resume.pdf" target="_blank" rel="noopener">Resume ↗</a
+      ><a href="#contact">Contact</a>
+    </div>
+    <main id="home">
+      <section class="hero section-shell" aria-labelledby="hero-title">
+        <div class="hero-meta">
+          <span><i class="status-dot"></i> Software Engineer · Oracle</span
+          ><span>Bengaluru, India</span>
+        </div>
+        <h1 id="hero-title" class="hero-name">
+          <span>Harshvardhan</span> <span>Birla<span class="name-period">.</span></span>
+        </h1>
+        <div class="hero-layout">
+          <div class="hero-copy">
+            <h2 class="hero-statement">Database security.<br /><em>Systems engineering.</em></h2>
+            <p class="hero-intro">
+              I work on database security at Oracle. My side projects explore distributed storage,
+              concurrency, and low-latency C++.
+            </p>
+            <div class="hero-cta">
+              <a class="button button-lime" href="#work">View projects <span>↘</span></a
+              ><a class="underlined" href="resume/resume.pdf" target="_blank" rel="noopener"
+                >Resume · PDF ↗</a
+              >
+            </div>
+          </div>
+          <div class="hero-art">
+            <svg class="hero-fallback" viewBox="0 0 520 500" aria-hidden="true" focusable="false">
+              <g fill="none" stroke="currentColor" stroke-width="1">
+                <ellipse cx="260" cy="155" rx="150" ry="58"></ellipse>
+                <ellipse cx="260" cy="185" rx="150" ry="58" opacity=".35"></ellipse>
+                <ellipse cx="260" cy="220" rx="150" ry="58" opacity=".35"></ellipse>
+                <ellipse cx="260" cy="255" rx="150" ry="58"></ellipse>
+                <ellipse cx="260" cy="290" rx="150" ry="58" opacity=".35"></ellipse>
+                <ellipse cx="260" cy="325" rx="150" ry="58" opacity=".35"></ellipse>
+                <ellipse cx="260" cy="355" rx="150" ry="58"></ellipse>
+                <path
+                  d="M110 155V355M410 155V355M260 110V415"
+                  stroke-dasharray="2 7"
+                  opacity=".35"
+                ></path>
+                <path
+                  d="m220 235 40-20 40 20v45l-40 20-40-20zm0 0 40 20 40-20m-40 20v45"
+                  opacity=".7"
+                ></path>
+              </g>
+              <circle cx="260" cy="255" r="4" fill="currentColor"></circle>
+            </svg>
+            <canvas id="system-canvas" aria-hidden="true"></canvas>
+
+            <button class="motion-toggle" id="motion-toggle" aria-pressed="false">
+              Pause motion Ⅱ
+            </button>
+          </div>
+        </div>
+        <div class="hero-bottom">
+          <span class="mono hero-languages">C · C++ · Java · Python · SQL · PL/SQL</span>
+        </div>
+      </section>
+
+      <section class="work-section section-shell" id="work" aria-labelledby="work-title">
+        <div class="section-heading reveal">
+          <div>
+            <p class="eyebrow">My work</p>
+            <h2 id="work-title">Projects</h2>
+          </div>
+        </div>
+
+        <div class="project-grid" id="project-grid"><article class="project-card reveal" data-category="systems" aria-labelledby="card-event-engine"><div class="project-visual"><div class="visual-grid" aria-hidden="true"></div><span class="visual-code">01 / LOW-LATENCY SYSTEMS</span><div class="visual-center" aria-hidden="true"><div class="engine-path"><span class="engine-box">event</span><span class="path-arrow">→</span><span class="engine-box lit">SPSC</span><span class="path-arrow">→</span><span class="engine-box">decision</span></div></div><span class="visual-caption">Reported p99 · local decision path</span></div><div class="project-info"><div class="project-meta"><span>Low-latency systems</span></div><h3 class="project-title" id="card-event-engine">Low-Latency C++ Event Processing Engine</h3><p class="project-tagline">The fast path. The full story.</p><p>A C++17 event-processing backend with live and replayable inputs, explainable risk scoring, provider circuit breakers, and SQLite persistence paths.</p><div class="project-tags"><span>C++17</span><span>Concurrency</span><span>SQLite</span></div><a class="project-link" data-project-id="event-engine" href="projects/event-engine/" aria-label="Read Low-Latency C++ Event Processing Engine case study">View project <span>↗</span></a></div></article><article class="project-card reveal" data-category="systems" aria-labelledby="card-snapshot-prune"><div class="project-visual"><div class="visual-grid" aria-hidden="true"></div><span class="visual-code">02 / DISTRIBUTED STORAGE</span><div class="visual-center" aria-hidden="true"><div class="card-graphic-storage"><strong>A₁</strong><small>≠</small><strong>A₂</strong></div></div><span class="visual-caption">Concurrent uploads + online cleanup</span></div><div class="project-info"><div class="project-meta"><span>Distributed storage</span></div><h3 class="project-title" id="card-snapshot-prune">Live Snapshot Prune</h3><p class="project-tagline">Same bytes. Different lifetime.</p><p>A backup storage system with PostgreSQL metadata, snapshot APIs, independent object storage, and garbage collection that runs alongside uploads and restores.</p><div class="project-tags"><span>Python</span><span>PostgreSQL</span><span>Docker</span></div><a class="project-link" data-project-id="snapshot-prune" href="projects/snapshot-prune/" aria-label="Read Live Snapshot Prune case study">View project <span>↗</span></a></div></article><article class="project-card reveal" data-category="product" aria-labelledby="card-loopbreaker"><div class="project-visual"><div class="visual-grid" aria-hidden="true"></div><span class="visual-code">03 / PRODUCT ENGINEERING</span><div class="visual-center" aria-hidden="true"><div class="loop-rings"><i></i><i></i><i></i><i></i></div></div><span class="visual-caption">Watch counts + active time + pause points</span></div><div class="project-info"><div class="project-meta"><span>Product engineering</span></div><h3 class="project-title" id="card-loopbreaker">Loopbreaker</h3><p class="project-tagline">An exit from the infinite feed.</p><p>A browser extension that counts short-form videos and active watch time, saves sessions locally, and inserts pause points on Instagram and YouTube.</p><div class="project-tags"><span>JavaScript</span><span>Manifest V3</span><span>Browser APIs</span></div><a class="project-link" data-project-id="loopbreaker" href="projects/loopbreaker/" aria-label="Read Loopbreaker case study">View project <span>↗</span></a></div></article><article class="project-card reveal" data-category="systems" aria-labelledby="card-order-agent"><div class="project-visual"><div class="visual-grid" aria-hidden="true"></div><span class="visual-code">04 / EXECUTION INFRASTRUCTURE</span><div class="visual-center" aria-hidden="true"><div class="order-graphic"><span>GTC</span><span>GTT</span><span>IOC</span><span>FOK</span></div></div><span class="visual-caption">GTC · GTT · IOC · FOK</span></div><div class="project-info"><div class="project-meta"><span>Execution infrastructure</span></div><h3 class="project-title" id="card-order-agent">Curve DEX Limit Order Agent</h3><p class="project-tagline">A quote is not an execution.</p><p>A C++ order agent with live Ethereum reads, four order policies, and an offline scenario harness. Transaction submission is mocked.</p><div class="project-tags"><span>C++17</span><span>JSON-RPC</span><span>State machines</span></div><a class="project-link" data-project-id="order-agent" href="projects/order-agent/" aria-label="Read Curve DEX Limit Order Agent case study">View project <span>↗</span></a></div></article><article class="project-card reveal" data-category="ml" aria-labelledby="card-sentiment"><div class="project-visual"><div class="visual-grid" aria-hidden="true"></div><span class="visual-code">05 / APPLIED MACHINE LEARNING</span><div class="visual-center" aria-hidden="true"><div class="ml-graphic">RoBERTa</div></div><span class="visual-caption">Interview transcript sentiment prototype</span></div><div class="project-info"><div class="project-meta"><span>Applied machine learning</span></div><h3 class="project-title" id="card-sentiment">Interview Sentiment with RoBERTa</h3><p class="project-tagline">Interview transcripts, transformer models.</p><p>An exploratory RoBERTa notebook for preparing interview transcripts and testing sentiment-related scoring.</p><div class="project-tags"><span>Python</span><span>PyTorch</span><span>RoBERTa</span></div><a class="project-link" data-project-id="sentiment" href="projects/sentiment/" aria-label="Read Interview Sentiment with RoBERTa case study">View project <span>↗</span></a></div></article><article class="project-card reveal" data-category="systems" aria-labelledby="card-distributed-storage"><div class="project-visual"><div class="visual-grid" aria-hidden="true"></div><span class="visual-code">06 / DISTRIBUTED SYSTEMS</span><div class="visual-center" aria-hidden="true"><div class="nodes-graphic"><i></i><span>↔</span><i></i><span>↔</span><i></i></div></div><span class="visual-caption">Replicated metadata + single-node recovery</span></div><div class="project-info"><div class="project-meta"><span>Distributed systems</span></div><h3 class="project-title" id="card-distributed-storage">Distributed Storage Engine</h3><p class="project-tagline">Keep the data moving.</p><p>Multi-node storage with Kafka-based ingestion, partitioned communication, parallel consumers, replicated metadata, and recovery from tested single-node failures.</p><div class="project-tags"><span>Apache Kafka</span><span>Replication</span><span>Fault tolerance</span></div><a class="project-link" data-project-id="distributed-storage" href="projects/distributed-storage/" aria-label="Read Distributed Storage Engine case study">View project <span>↗</span></a></div></article><article class="project-card reveal" data-category="systems" aria-labelledby="card-compute-platform"><div class="project-visual"><div class="visual-grid" aria-hidden="true"></div><span class="visual-code">07 / DISTRIBUTED ORCHESTRATION</span><div class="visual-center" aria-hidden="true"><div class="engine-path"><span class="engine-box">worker</span><span class="path-arrow">↔</span><span class="engine-box lit">state</span><span class="path-arrow">↔</span><span class="engine-box">worker</span></div></div><span class="visual-caption">HDFS + Redis + ZooKeeper</span></div><div class="project-info"><div class="project-meta"><span>Distributed orchestration</span></div><h3 class="project-title" id="card-compute-platform">Distributed Compute Orchestration Platform</h3><p class="project-tagline">Tasks, state, and worker coordination.</p><p>Multi-node task orchestration with HDFS for durable data, Redis for fast state access, and ZooKeeper for worker coordination.</p><div class="project-tags"><span>HDFS</span><span>Redis</span><span>ZooKeeper</span></div><a class="project-link" data-project-id="compute-platform" href="projects/compute-platform/" aria-label="Read Distributed Compute Orchestration Platform case study">View project <span>↗</span></a></div></article><article class="project-card reveal" data-category="ml" aria-labelledby="card-distributed-training"><div class="project-visual"><div class="visual-grid" aria-hidden="true"></div><span class="visual-code">08 / ML INFRASTRUCTURE</span><div class="visual-center" aria-hidden="true"><div class="ml-graphic">n → n + 1</div></div><span class="visual-caption">Training configuration → hosted inference</span></div><div class="project-info"><div class="project-meta"><span>ML infrastructure</span></div><h3 class="project-title" id="card-distributed-training">Distributed TensorFlow Training</h3><p class="project-tagline">From training to hosted inference.</p><p>A TensorFlow/SageMaker walkthrough covering distributed training configuration, model deployment, inference, and resource cleanup.</p><div class="project-tags"><span>TensorFlow</span><span>SageMaker</span><span>MNIST</span></div><a class="project-link" data-project-id="distributed-training" href="projects/distributed-training/" aria-label="Read Distributed TensorFlow Training case study">View project <span>↗</span></a></div></article></div>
+      </section>
+
+      <section class="about-section section-shell" id="about" aria-labelledby="about-title">
+        <div class="about-left">
+          <p class="eyebrow">About me</p>
+          <h2 id="about-title">Software engineer<br /><em>at Oracle.</em></h2>
+          <p>
+            I’m on Oracle’s Database Security team in Bengaluru, working on C-based database
+            infrastructure.
+          </p>
+          <p>
+            I studied Computer Science at BITS Pilani, Goa. Outside work, I build systems projects
+            to explore storage, concurrency, and fault tolerance.
+          </p>
+          <a href="resume/resume.pdf" target="_blank" rel="noopener" class="underlined"
+            >The full resume · PDF ↗</a
+          >
+          <div class="about-signature" aria-hidden="true">Harshvardhan<br /><em>Birla.</em></div>
+        </div>
+        <div class="timeline">
+          <article>
+            <span class="timeline-dot"></span>
+            <div class="timeline-date">Jan 2025 — Present</div>
+            <h3>Oracle</h3>
+            <p class="timeline-role">Software Engineer / Database Security</p>
+            <p>
+              Investigating C-based RDBMS defects with GDB, core dumps, trace files, and internal
+              diagnostic tools. Work covers memory corruption, authentication, role systems, session
+              state, and backward compatibility.
+            </p>
+            <div class="achievement">
+              <strong>8×</strong
+              ><span
+                >Oracle Label Security capacity enhancement<br /><b
+                  >VARCHAR2(4000) → VARCHAR2(32000)</b
+                ></span
+              >
+            </div>
+          </article>
+          <article>
+            <span class="timeline-dot"></span>
+            <div class="timeline-date">May — Jul 2023</div>
+            <h3>iQuadra Information Services</h3>
+            <p class="timeline-role">Machine Learning Intern / Remote</p>
+            <p>
+              Fine-tuned a RoBERTa-based sentiment model and developed computer-vision pipelines for
+              candidate assessment.
+            </p>
+          </article>
+          <article>
+            <span class="timeline-dot"></span>
+            <div class="timeline-date">2021 — 2025</div>
+            <h3>BITS Pilani, Goa Campus</h3>
+            <p class="timeline-role">B.E. (Hons.) Computer Science / CGPA 8.7</p>
+            <p>Operating systems, distributed systems, databases, networks, and algorithms.</p>
+            <div class="education-tags">
+              <span>NTSE Scholar</span><span>JEE Mains 99.69 percentile</span
+              ><span>JEE Advanced AIR 3547</span>
+            </div>
+          </article>
+        </div>
+      </section>
+      <section class="toolkit-section section-shell">
+        <div class="toolkit-intro">
+          <h2>Skills</h2>
+        </div>
+        <div class="toolkit-grid">
+          <div>
+            <span>01 / Languages</span>
+            <p>C · C++ · Python<br />Java · SQL · PL/SQL</p>
+          </div>
+          <div>
+            <span>02 / Data &amp; infrastructure</span>
+            <p>Oracle · PostgreSQL · Kafka<br />Redis · HDFS · ZooKeeper · SQLite</p>
+          </div>
+          <div>
+            <span>03 / Workflow</span>
+            <p>Linux · GDB · Docker · Git<br />CMake · Gradle · Shell · REST</p>
+          </div>
+          <div>
+            <span>04 / Systems</span>
+            <p>Concurrency · Fault tolerance<br />Storage · High availability · Latency</p>
+          </div>
+        </div>
+      </section>
+      <section class="contact-section section-shell" id="contact">
+        <div class="contact-top">
+          <a href="#home" class="back-top">Back to top ↑</a>
+        </div>
+        <h2>Get in touch.</h2>
+        <div class="contact-bottom">
+          <a class="email-link" href="mailto:harshvardhanb11@gmail.com"
+            >harshvardhanb11@gmail.com <span>↗</span></a
+          ><button
+            class="copy-email icon-button"
+            aria-label="Copy email address"
+            title="Copy email address"
+          >
+            ⧉</button
+          ><a
+            class="github-link"
+            href="https://github.com/harshvardhanb11"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GitHub ↗</a
+          ><a
+            class="linkedin-link"
+            href="https://www.linkedin.com/in/harshvardhan-birla-160a31230"
+            target="_blank"
+            rel="noopener noreferrer"
+            >LinkedIn ↗</a
+          >
+        </div>
+
+        <div id="copy-status" class="sr-only" role="status"></div>
+      </section>
+    </main>
+    <div id="demo-store" hidden="">
+      <section class="project-demo" id="playground" hidden="" aria-label="Project interactive demo">
+        <div class="lab-tabs" role="tablist" aria-label="Interactive experiments">
+          <button
+            id="tab-storage"
+            role="tab"
+            aria-selected="true"
+            aria-controls="panel-storage"
+            data-lab="storage"
+          >
+            <span>Storage lifecycle</span></button
+          ><button
+            id="tab-replay"
+            role="tab"
+            aria-selected="false"
+            aria-controls="panel-replay"
+            tabindex="-1"
+            data-lab="replay"
+          >
+            <span>Alert thresholds</span></button
+          ><button
+            id="tab-queue"
+            role="tab"
+            aria-selected="false"
+            aria-controls="panel-queue"
+            tabindex="-1"
+            data-lab="queue"
+          >
+            <span>Queue backpressure</span></button
+          ><button
+            id="tab-orders"
+            role="tab"
+            aria-selected="false"
+            aria-controls="panel-orders"
+            tabindex="-1"
+            data-lab="orders"
+          >
+            <span>Order policies</span>
+          </button>
+        </div>
+        <div class="lab-frame">
+          <section
+            id="panel-storage"
+            class="lab-panel"
+            role="tabpanel"
+            aria-labelledby="tab-storage"
+          >
+            <div class="lab-explainer">
+              <span class="lab-kind">Conceptual simulation</span>
+              <h3>Delayed deletion</h3>
+              <p>
+                A delete is delayed. The same bytes are uploaded again. Does the old delete know
+                which object lifetime it belongs to?
+              </p>
+              <label class="switch-row"
+                ><input type="checkbox" id="incarnation-mode" checked="" /><span
+                  >Use incarnation-aware identity</span
+                ></label
+              >
+              <div class="lab-buttons">
+                <button class="button button-lime" id="storage-step">Next event →</button
+                ><button class="button button-ghost" id="storage-reset">Reset ↻</button>
+              </div>
+              <p class="lab-limit">Conceptual model of the storage race.</p>
+            </div>
+            <div class="lab-stage">
+              <div class="stage-top">
+                <span>Object lifecycle</span><span id="storage-step-count">Event 0 / 4</span>
+              </div>
+              <div class="object-world">
+                <div class="object-node" id="object-old">
+                  <span class="mono">PHYSICAL OBJECT</span><strong>A₁</strong
+                  ><small id="old-state">Unreferenced</small>
+                </div>
+                <div class="object-hash">
+                  <span>same content</span><strong>H</strong><span>different lifetime</span>
+                </div>
+                <div class="object-node object-new inactive" id="object-new">
+                  <span class="mono">PHYSICAL OBJECT</span><strong>A₂</strong
+                  ><small id="new-state">Not created yet</small>
+                </div>
+              </div>
+              <div class="lab-log" id="storage-log" role="status" aria-live="polite">
+                Ready. A₁ has no live references. Queue its deletion to begin.
+              </div>
+              <div class="invariant" id="storage-invariant">
+                <span class="status-dot"></span> Invariant: newly referenced A₂ must survive old
+                work.
+              </div>
+            </div>
+          </section>
+          <section
+            id="panel-replay"
+            class="lab-panel"
+            role="tabpanel"
+            aria-labelledby="tab-replay"
+            hidden=""
+          >
+            <div class="lab-explainer">
+              <span class="lab-kind">Source-derived scoring / 9 records</span>
+              <h3>Alert threshold replay</h3>
+              <p>
+                A lower threshold catches more signals, but can create false alarms. A higher one
+                may miss the event you care about.
+              </p>
+              <div class="range-label">
+                <label for="risk-threshold">Alert threshold</label
+                ><output id="risk-value" for="risk-threshold" aria-label="Selected threshold"
+                  >0.30</output
+                >
+              </div>
+              <input
+                type="range"
+                id="risk-threshold"
+                min="0.05"
+                max="0.80"
+                step="0.01"
+                value="0.30"
+              />
+              <div class="range-ends"><span>Sensitive</span><span>Conservative</span></div>
+              <p class="lab-limit">JavaScript replay of the repository’s nine-record fixture.</p>
+            </div>
+            <div class="lab-stage">
+              <div class="stage-top">
+                <span>Labeled fixture / threshold sweep</span
+                ><span id="replay-summary">1 alert</span>
+              </div>
+              <div
+                class="replay-chart"
+                id="replay-chart"
+                role="group"
+                aria-label="Risk scores for nine replay records"
+              ></div>
+              <div class="replay-metrics" aria-live="polite" aria-atomic="true">
+                <div><strong id="metric-tp">1</strong><span>True positive</span></div>
+                <div><strong id="metric-fp">0</strong><span>False positive</span></div>
+                <div><strong id="metric-fn">0</strong><span>Missed alert</span></div>
+                <div><strong id="metric-f1">1.00</strong><span>F1 on fixture</span></div>
+              </div>
+              <p class="lab-log" id="replay-message">
+                One labeled stress event. Eight labeled normal records.
+              </p>
+            </div>
+          </section>
+          <section
+            id="panel-queue"
+            class="lab-panel"
+            role="tabpanel"
+            aria-labelledby="tab-queue"
+            hidden=""
+          >
+            <div class="lab-explainer">
+              <span class="lab-kind">Conceptual model / 12 slots</span>
+              <h3>Bounded queue</h3>
+              <p>
+                The producer submits events. The consumer processes them. A finite queue turns a
+                rate mismatch into a concrete decision.
+              </p>
+              <div class="range-label">
+                <label for="producer-rate">Producer / events per tick</label
+                ><output id="producer-value" for="producer-rate" aria-label="Selected producer rate"
+                  >3</output
+                >
+              </div>
+              <input type="range" id="producer-rate" min="1" max="6" value="3" />
+              <div class="range-label">
+                <label for="consumer-rate">Consumer / events per tick</label
+                ><output id="consumer-value" for="consumer-rate" aria-label="Selected consumer rate"
+                  >2</output
+                >
+              </div>
+              <input type="range" id="consumer-rate" min="0" max="6" value="2" />
+              <div class="lab-buttons">
+                <button class="button button-lime" id="queue-step">Advance tick →</button
+                ><button class="button button-ghost" id="queue-reset">Reset ↻</button>
+              </div>
+              <p class="lab-limit">
+                Illustrative rates per tick; this is not a throughput benchmark.
+              </p>
+            </div>
+            <div class="lab-stage">
+              <div class="stage-top">
+                <span>Bounded queue</span><span id="queue-tick">Tick 0</span>
+              </div>
+              <div class="queue-flow"><span>Producer →</span><span>→ Consumer</span></div>
+              <div
+                class="queue-slots"
+                id="queue-slots"
+                role="img"
+                aria-label="Queue occupancy: 0 of 12 slots filled"
+              ></div>
+              <div class="replay-metrics">
+                <div><strong id="queue-depth">0</strong><span>Queued</span></div>
+                <div><strong id="queue-accepted">0</strong><span>Accepted</span></div>
+                <div><strong id="queue-processed">0</strong><span>Processed</span></div>
+                <div><strong id="queue-rejected">0</strong><span>Rejected</span></div>
+              </div>
+              <p class="lab-log" id="queue-message" role="status">
+                Set a rate and advance time. What if the consumer stops?
+              </p>
+            </div>
+          </section>
+          <section
+            id="panel-orders"
+            class="lab-panel"
+            role="tabpanel"
+            aria-labelledby="tab-orders"
+            hidden=""
+          >
+            <div class="lab-explainer">
+              <span class="lab-kind">Policy replay / repository fixture</span>
+              <h3>Order policy replay</h3>
+              <p>
+                Four orders see the same sequence, but their policies make different promises.
+                Advance the market and inspect each transition.
+              </p>
+              <div class="lab-buttons">
+                <button class="button button-lime" id="order-step">Next market tick →</button
+                ><button class="button button-ghost" id="order-reset">Reset ↻</button>
+              </div>
+              <p class="lab-limit">
+                Offline replay of the C++ fixture; signing and submission are mocked.
+              </p>
+            </div>
+            <div class="lab-stage">
+              <div class="stage-top">
+                <span>Deterministic market sequence</span
+                ><span id="order-market">Awaiting tick 0</span>
+              </div>
+              <div class="order-table-wrap">
+                <table class="order-table">
+                  <caption class="sr-only">
+                    Simulated order states
+                  </caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Policy</th>
+                      <th scope="col">Limit</th>
+                      <th scope="col">State</th>
+                      <th scope="col">Reason</th>
+                    </tr>
+                  </thead>
+                  <tbody id="order-rows"></tbody>
+                </table>
+              </div>
+              <p class="lab-log" id="order-message" role="status">
+                GTC waits. IOC needs an immediate fill. FOK needs full liquidity. GTT has an expiry.
+              </p>
+            </div>
+          </section>
+        </div>
+      </section>
+    </div>
+    <footer class="site-footer section-shell">
+      <a class="wordmark footer-mark" href="#home"
+        >Harshvardhan Birla<span class="name-period">.</span></a
+      >
+      <div>
+        <span>© 2026</span>
+      </div>
+    </footer>
+    <dialog id="reader" class="reader-dialog" aria-labelledby="reader-title">
+      <div class="reader-bar">
+        <a href="#work" class="reader-back" id="reader-close">← Back to the work</a
+        ><span class="mono">Harshvardhan Birla</span
+        ><button class="icon-button" id="reader-x" aria-label="Close case study">×</button>
+      </div>
+      <div id="reader-content"><h2 id="reader-title" class="sr-only">Engineering story</h2></div>
+    </dialog>
+    <dialog id="search-dialog" class="search-dialog" aria-labelledby="search-title">
+      <div class="search-head">
+        <h2 id="search-title">Find a project or idea</h2>
+        <button class="icon-button" id="search-close" aria-label="Close search">×</button>
+      </div>
+      <label class="sr-only" for="site-search">Search projects and notes</label
+      ><input
+        id="site-search"
+        type="search"
+        placeholder="Try “storage”, “C++”, or “tradeoffs”…"
+        autocomplete="off"
+      />
+      <div id="search-results" class="search-results"></div>
+      <p class="search-hint">Tab to a result · Enter to open · Esc to close</p>
+    </dialog>
+    <noscript
+      ><div class="noscript">
+        Read the <a href="resume/resume.pdf">resume</a> or open a project page below. JavaScript
+        enables the interactive demos.
+      </div></noscript
+    >
+  </body>
+</html>
