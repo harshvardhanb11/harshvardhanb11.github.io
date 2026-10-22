@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101815" />
+    <meta
+      name="description"
+      content="Harshvardhan Birla — software engineer at Oracle, exploring database security, distributed storage, low-latency C++, and applied ML. Read the work. Explore the tradeoffs."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Harshvardhan Birla — Engineering the invisible" />
+    <meta
+      property="og:description"
+      content="Database security. Distributed systems. Small details with big consequences. Explore eight engineering stories and four interactive labs."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>Harshvardhan Birla — Engineering the invisible</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="content.js" defer></script>
+    <script src="glossary.js" defer></script>
+    <script src="decisions.js" defer></script>
+    <script src="render.js" defer></script>
+    <script src="app.js" defer></script>
+    <script src="lab-core.js" defer></script>
+    <script src="labs.js" defer></script>
+    <script src="visuals.js" defer></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Harshvardhan Birla",
+        "jobTitle": "Software Engineer",
+        "worksFor": { "@type": "Organization", "name": "Oracle" },
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "BITS Pilani, Goa Campus" },
+        "sameAs": ["https://github.com/harshvardhanb11"],
+        "knowsAbout": ["Database security", "Distributed systems", "C++", "Storage systems"]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#work">Skip to work</a>
+    <div class="reading-progress" aria-hidden="true"><span id="page-progress"></span></div>
+    <header class="site-header">
+      <a class="wordmark" href="#home" aria-label="Harshvardhan Birla home"
+        ><span class="monogram">h<span>·</span>b</span
+        ><span class="wordmark-name">Harshvardhan<br /><b>Birla</b></span></a
+      >
+      <nav class="desktop-nav" aria-label="Primary">
+        <a href="#work">The work</a><a href="#playground">Playground</a
+        ><a href="#notes">Field notes</a><a href="#about">About</a>
+      </nav>
+      <div class="header-actions">
+        <button
+          class="icon-button command-button"
+          aria-label="Search site, Control or Command K"
+          title="Search site (⌘/Ctrl K)"
+        >
+          ⌘ K</button
+        ><button
+          class="icon-button"
+          id="theme-toggle"
+          aria-label="Switch to light theme"
+          title="Change color theme"
+        >
+          ◐</button
+        ><a class="contact-nav" href="#contact">Say hello <span>↗</span></a
+        ><button
+          class="icon-button mobile-menu"
+          id="menu-toggle"
+          aria-label="Open navigation"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+      </div>
+    </header>
+    <div class="mobile-nav" id="mobile-nav" hidden>
+      <a href="#work">The work</a><a href="#playground">Playground</a
+      ><a href="#notes">Field notes</a><a href="#about">About</a><a href="#contact">Contact</a>
+    </div>
+    <main id="home">
+      <section class="hero section-shell" aria-labelledby="hero-title">
+        <div class="hero-meta">
+          <span><i class="status-dot"></i> Software engineer · Oracle</span
+          ><span
+            >Bengaluru, India <span class="muted">/</span> <span id="local-time">IST</span></span
+          >
+        </div>
+        <div class="hero-layout">
+          <div class="hero-copy">
+            <p class="eyebrow">
+              <span class="tiny-cross">+</span> Small details. Big consequences.
+            </p>
+            <h1 id="hero-title">Engineering<br />the <em>invisible.</em></h1>
+            <p class="hero-intro">
+              I’m Harshvardhan. I work close to the machinery—<strong
+                >databases, storage, and concurrent systems</strong
+              >—where the most important behavior is often the hardest to see.
+            </p>
+            <div class="hero-cta">
+              <a class="button button-lime" href="#work">Inside the work <span>↘</span></a
+              ><a class="underlined" href="resume.html" target="_blank" rel="noopener"
+                >Read my resume ↗</a
+              >
+            </div>
+          </div>
+          <div class="hero-art">
+            <svg class="hero-fallback" viewBox="0 0 520 500" aria-hidden="true" focusable="false">
+              <g fill="none" stroke="currentColor" stroke-width="1">
+                <ellipse cx="260" cy="155" rx="150" ry="58" />
+                <ellipse cx="260" cy="185" rx="150" ry="58" opacity=".35" />
+                <ellipse cx="260" cy="220" rx="150" ry="58" opacity=".35" />
+                <ellipse cx="260" cy="255" rx="150" ry="58" />
+                <ellipse cx="260" cy="290" rx="150" ry="58" opacity=".35" />
+                <ellipse cx="260" cy="325" rx="150" ry="58" opacity=".35" />
+                <ellipse cx="260" cy="355" rx="150" ry="58" />
+                <path
+                  d="M110 155V355M410 155V355M260 110V415"
+                  stroke-dasharray="2 7"
+                  opacity=".35"
+                />
+                <path
+                  d="m220 235 40-20 40 20v45l-40 20-40-20zm0 0 40 20 40-20m-40 20v45"
+                  opacity=".7"
+                />
+              </g>
+              <circle cx="260" cy="255" r="4" fill="currentColor" />
+            </svg>
+            <canvas id="system-canvas" aria-hidden="true"></canvas>
+            <div class="art-label art-label-top">
+              <span class="status-dot"></span> Systems / in motion
+            </div>
+            <div class="art-coordinate">X 00.42<br />Y 18.07<br />Z 01.00</div>
+            <div class="art-caption">
+              <span class="crosshair">⊕</span
+              ><span>Many moving parts.<br /><b>One coherent system.</b></span>
+            </div>
+            <button class="motion-toggle" id="motion-toggle" aria-pressed="false">
+              Pause motion Ⅱ
+            </button>
+          </div>
+        </div>
+        <div class="hero-bottom">
+          <span class="mono">C / C++ / Python / SQL</span
+          ><span class="hero-principle"
+            >Find the invariant.<span>Test the failure.</span>Understand the cost.</span
+          ><a href="#work" class="scroll-cue" aria-label="Scroll to selected work"
+            >Scroll to explore <span>↓</span></a
+          >
+        </div>
+      </section>
+      <div class="ticker" aria-hidden="true">
+        <div>
+          DATABASE SECURITY <span>✳</span> DISTRIBUTED SYSTEMS <span>✳</span> FAULT TOLERANCE
+          <span>✳</span> LOW-LATENCY C++ <span>✳</span> DATABASE SECURITY <span>✳</span> DISTRIBUTED
+          SYSTEMS <span>✳</span> FAULT TOLERANCE <span>✳</span> LOW-LATENCY C++ <span>✳</span>
+        </div>
+      </div>
+      <nav class="starting-points section-shell" aria-label="Suggested starting points">
+        <div class="starting-label">
+          <span class="eyebrow">A short route<br />through the work</span
+          ><span class="muted">Choose a question →</span>
+        </div>
+        <a href="projects/event-engine/" data-project-id="event-engine"
+          ><span class="mono">01 / Performance</span><strong>How fast—and where?</strong
+          ><small>Local benchmarks, queue boundaries, replay.</small></a
+        ><a href="projects/snapshot-prune/" data-project-id="snapshot-prune"
+          ><span class="mono">02 / Correctness</span><strong>What if old work arrives late?</strong
+          ><small>Object lifetimes and a stale-delete race.</small></a
+        ><a href="projects/loopbreaker/" data-project-id="loopbreaker"
+          ><span class="mono">03 / Product</span><strong>What should actually count?</strong
+          ><small>Video identity, active time, deliberate friction.</small></a
+        >
+      </nav>
+      <section class="work-section section-shell" id="work" aria-labelledby="work-title">
+        <div class="section-heading reveal">
+          <div>
+            <p class="eyebrow">01 — Selected work</p>
+            <h2 id="work-title">The interesting part<br />is <em>underneath.</em></h2>
+          </div>
+          <p class="section-description">
+            Beyond the demo: the decisions, failure modes, and evidence behind what I build.
+          </p>
+        </div>
+        <div class="work-toolbar">
+          <div class="filter-group" role="group" aria-label="Filter projects">
+            <button data-filter="all" aria-pressed="true">All work <small>08</small></button
+            ><button data-filter="systems" aria-pressed="false">Systems</button
+            ><button data-filter="product" aria-pressed="false">Product</button
+            ><button data-filter="ml" aria-pressed="false">AI & ML</button>
+          </div>
+          <span class="mono work-count" id="work-count" role="status"
+            >08 projects / 03 disciplines</span
+          >
+        </div>
+        <div class="project-grid" id="project-grid"><article class="project-card reveal" data-category="systems" aria-labelledby="card-event-engine"><div class="project-visual"><div class="visual-grid" aria-hidden="true"></div><span class="visual-code">01 / LOW-LATENCY SYSTEMS</span><div class="visual-center" aria-hidden="true"><div class="engine-path"><span class="engine-box">event</span><span class="path-arrow">→</span><span class="engine-box lit">SPSC</span><span class="path-arrow">→</span><span class="engine-box">decision</span></div></div><span class="visual-caption">Reported p99 · local decision path</span></div><div class="project-info"><div class="project-meta"><span>Low-latency systems</span><span class="project-evidence ">Public source ↗</span></div><h3 id="card-event-engine">The fast path.
+The full story.</h3><div class="project-real-name">C++ Event Processing Engine</div><p>A real-time risk engine where latency is measured, failures are replayable, and alerts explain themselves.</p><div class="project-tags"><span>C++17</span><span>Concurrency</span><span>SQLite</span></div><a class="project-link" data-project-id="event-engine" href="projects/event-engine/" aria-label="Read C++ Event Processing Engine case study">Inside the project <span>↗</span></a></div></article><article class="project-card reveal" data-category="systems" aria-labelledby="card-snapshot-prune"><div class="project-visual"><div class="visual-grid" aria-hidden="true"></div><span class="visual-code">02 / DISTRIBUTED STORAGE</span><div class="visual-center" aria-hidden="true"><div class="card-graphic-storage"><strong>A₁</strong><small>≠</small><strong>A₂</strong></div></div><span class="visual-caption">Content identity is not object lifetime</span></div><div class="project-info"><div class="project-meta"><span>Distributed storage</span><span class="project-evidence resume">Resume project ○</span></div><h3 id="card-snapshot-prune">Same bytes.
+Different lifetime.</h3><div class="project-real-name">Live Snapshot Prune</div><p>Online garbage collection with concurrent uploads, restores, and deletions—and an ABA-style race hiding in the object identity.</p><div class="project-tags"><span>Python</span><span>PostgreSQL</span><span>Docker</span></div><a class="project-link" data-project-id="snapshot-prune" href="projects/snapshot-prune/" aria-label="Read Live Snapshot Prune case study">Inside the project <span>↗</span></a></div></article><article class="project-card reveal" data-category="product" aria-labelledby="card-loopbreaker"><div class="project-visual"><div class="visual-grid" aria-hidden="true"></div><span class="visual-code">03 / PRODUCT ENGINEERING</span><div class="visual-center" aria-hidden="true"><div class="loop-rings"><i></i><i></i><i></i><i></i></div></div><span class="visual-caption">A product built around intentional friction</span></div><div class="project-info"><div class="project-meta"><span>Product engineering</span><span class="project-evidence ">Public source ↗</span></div><h3 id="card-loopbreaker">An exit from
+the infinite feed.</h3><div class="project-real-name">Loopbreaker</div><p>A browser extension that makes short-form video consumption visible, then adds a deliberate stopping point.</p><div class="project-tags"><span>JavaScript</span><span>Manifest V3</span><span>Browser APIs</span></div><a class="project-link" data-project-id="loopbreaker" href="projects/loopbreaker/" aria-label="Read Loopbreaker case study">Inside the project <span>↗</span></a></div></article><article class="project-card reveal" data-category="systems" aria-labelledby="card-order-agent"><div class="project-visual"><div class="visual-grid" aria-hidden="true"></div><span class="visual-code">04 / EXECUTION INFRASTRUCTURE</span><div class="visual-center" aria-hidden="true"><div class="order-graphic"><span>GTC</span><span>GTT</span><span>IOC</span><span>FOK</span></div></div><span class="visual-caption">GTC · GTT · IOC · FOK</span></div><div class="project-info"><div class="project-meta"><span>Execution infrastructure</span><span class="project-evidence ">Public source ↗</span></div><h3 id="card-order-agent">A quote is not
+an execution.</h3><div class="project-real-name">Curve DEX Limit Order Agent</div><p>Explicit order lifetimes, liquidity checks, and deterministic policy scenarios around live Ethereum reads.</p><div class="project-tags"><span>C++17</span><span>JSON-RPC</span><span>State machines</span></div><a class="project-link" data-project-id="order-agent" href="projects/order-agent/" aria-label="Read Curve DEX Limit Order Agent case study">Inside the project <span>↗</span></a></div></article><article class="project-card reveal" data-category="ml" aria-labelledby="card-sentiment"><div class="project-visual"><div class="visual-grid" aria-hidden="true"></div><span class="visual-code">05 / APPLIED MACHINE LEARNING</span><div class="visual-center" aria-hidden="true"><div class="ml-graphic">Define y.</div></div><span class="visual-caption">Evaluation starts with the target</span></div><div class="project-info"><div class="project-meta"><span>Applied machine learning</span><span class="project-evidence ">Exploratory notebook ↗</span></div><h3 id="card-sentiment">A score needs
+a meaningful target.</h3><div class="project-real-name">Interview Sentiment with RoBERTa</div><p>An exploratory NLP notebook—and the harder question of what an interview sentiment score actually measures.</p><div class="project-tags"><span>Python</span><span>PyTorch</span><span>RoBERTa</span></div><a class="project-link" data-project-id="sentiment" href="projects/sentiment/" aria-label="Read Interview Sentiment with RoBERTa case study">Inside the project <span>↗</span></a></div></article><article class="project-card reveal" data-category="systems" aria-labelledby="card-distributed-storage"><div class="project-visual"><div class="visual-grid" aria-hidden="true"></div><span class="visual-code">06 / DISTRIBUTED SYSTEMS</span><div class="visual-center" aria-hidden="true"><div class="nodes-graphic"><i></i><span>↔</span><i></i><span>↔</span><i></i></div></div><span class="visual-caption">Availability needs a failure model</span></div><div class="project-info"><div class="project-meta"><span>Distributed systems</span><span class="project-evidence resume">Resume project ○</span></div><h3 id="card-distributed-storage">Keep the data
+moving.</h3><div class="project-real-name">Distributed Storage Engine</div><p>Kafka-based ingestion and partitioned communication, replicated metadata, and single-node failure recovery.</p><div class="project-tags"><span>Apache Kafka</span><span>Replication</span><span>Fault tolerance</span></div><a class="project-link" data-project-id="distributed-storage" href="projects/distributed-storage/" aria-label="Read Distributed Storage Engine case study">Inside the project <span>↗</span></a></div></article><article class="project-card reveal" data-category="systems" aria-labelledby="card-compute-platform"><div class="project-visual"><div class="visual-grid" aria-hidden="true"></div><span class="visual-code">07 / DISTRIBUTED ORCHESTRATION</span><div class="visual-center" aria-hidden="true"><div class="engine-path"><span class="engine-box">worker</span><span class="path-arrow">↔</span><span class="engine-box lit">state</span><span class="path-arrow">↔</span><span class="engine-box">worker</span></div></div><span class="visual-caption">Different roles, different guarantees</span></div><div class="project-info"><div class="project-meta"><span>Distributed orchestration</span><span class="project-evidence resume">Resume project ○</span></div><h3 id="card-compute-platform">Coordinate
+the moving parts.</h3><div class="project-real-name">Distributed Compute Orchestration</div><p>Multi-node task execution with HDFS, Redis, and ZooKeeper handling different parts of distributed state.</p><div class="project-tags"><span>HDFS</span><span>Redis</span><span>ZooKeeper</span></div><a class="project-link" data-project-id="compute-platform" href="projects/compute-platform/" aria-label="Read Distributed Compute Orchestration case study">Inside the project <span>↗</span></a></div></article><article class="project-card reveal" data-category="ml" aria-labelledby="card-distributed-training"><div class="project-visual"><div class="visual-grid" aria-hidden="true"></div><span class="visual-code">08 / ML INFRASTRUCTURE</span><div class="visual-center" aria-hidden="true"><div class="ml-graphic">n → n + 1</div></div><span class="visual-caption">Measure before adding workers</span></div><div class="project-info"><div class="project-meta"><span>ML infrastructure</span><span class="project-evidence ">Public walkthrough ↗</span></div><h3 id="card-distributed-training">More workers.
+More questions.</h3><div class="project-real-name">Distributed TensorFlow Training</div><p>A SageMaker walkthrough connecting distributed data-parallel training to hosted inference and cleanup.</p><div class="project-tags"><span>TensorFlow</span><span>SageMaker</span><span>MNIST</span></div><a class="project-link" data-project-id="distributed-training" href="projects/distributed-training/" aria-label="Read Distributed TensorFlow Training case study">Inside the project <span>↗</span></a></div></article></div>
+        <div class="evidence-legend">
+          <span><i class="legend-dot"></i> Public source links inside each case study</span
+          ><span><i class="legend-dot amber"></i> Resume projects clearly identified</span>
+        </div>
+      </section>
+      <section class="manifesto section-shell reveal" aria-label="Engineering perspective">
+        <span class="eyebrow">The way I think about it</span>
+        <p>
+          Getting it to work is a beginning.<br />Understanding <em>why it holds up</em><br />is
+          where engineering gets interesting.
+        </p>
+        <div class="manifesto-foot">
+          <span class="mono">Correctness → Evidence → Confidence</span
+          ><span class="orbit-symbol" aria-hidden="true">✳</span>
+        </div>
+      </section>
+      <section class="lab-section section-shell" id="playground" aria-labelledby="lab-title">
+        <div class="section-heading reveal">
+          <div>
+            <p class="eyebrow">02 — The systems playground</p>
+            <h2 id="lab-title">Don’t just read it.<br /><em>Break it.</em></h2>
+          </div>
+          <p class="section-description">
+            Change a condition. Follow the consequences. Four small experiments that expose the
+            design questions.
+          </p>
+        </div>
+        <div class="lab-tabs" role="tablist" aria-label="Interactive experiments">
+          <button
+            id="tab-storage"
+            role="tab"
+            aria-selected="true"
+            aria-controls="panel-storage"
+            data-lab="storage"
+          >
+            01 <span>The stale delete</span></button
+          ><button
+            id="tab-replay"
+            role="tab"
+            aria-selected="false"
+            aria-controls="panel-replay"
+            tabindex="-1"
+            data-lab="replay"
+          >
+            02 <span>The alert threshold</span></button
+          ><button
+            id="tab-queue"
+            role="tab"
+            aria-selected="false"
+            aria-controls="panel-queue"
+            tabindex="-1"
+            data-lab="queue"
+          >
+            03 <span>The slow consumer</span></button
+          ><button
+            id="tab-orders"
+            role="tab"
+            aria-selected="false"
+            aria-controls="panel-orders"
+            tabindex="-1"
+            data-lab="orders"
+          >
+            04 <span>The order lifetime</span>
+          </button>
+        </div>
+        <div class="lab-frame">
+          <section
+            id="panel-storage"
+            class="lab-panel"
+            role="tabpanel"
+            aria-labelledby="tab-storage"
+          >
+            <div class="lab-explainer">
+              <span class="lab-kind">Conceptual simulation</span>
+              <h3>The past should not<br />delete the present.</h3>
+              <p>
+                A delete is delayed. The same bytes are uploaded again. Does the old delete know
+                which object lifetime it belongs to?
+              </p>
+              <label class="switch-row"
+                ><input type="checkbox" id="incarnation-mode" checked /><span
+                  >Use incarnation-aware identity</span
+                ></label
+              >
+              <div class="lab-buttons">
+                <button class="button button-lime" id="storage-step">Next event →</button
+                ><button class="button button-ghost" id="storage-reset">Reset ↻</button>
+              </div>
+              <p class="lab-limit">
+                Illustrates the race described in Live Snapshot Prune. Does not execute its services
+                or prove its protocol.
+              </p>
+              <a class="small-link" href="#project/snapshot-prune">Read the design story ↗</a>
+            </div>
+            <div class="lab-stage">
+              <div class="stage-top">
+                <span>Object lifecycle</span><span id="storage-step-count">Event 0 / 4</span>
+              </div>
+              <div class="object-world">
+                <div class="object-node" id="object-old">
+                  <span class="mono">PHYSICAL OBJECT</span><strong>A₁</strong
+                  ><small id="old-state">Unreferenced</small>
+                </div>
+                <div class="object-hash">
+                  <span>same content</span><strong>H</strong><span>different lifetime</span>
+                </div>
+                <div class="object-node object-new inactive" id="object-new">
+                  <span class="mono">PHYSICAL OBJECT</span><strong>A₂</strong
+                  ><small id="new-state">Not created yet</small>
+                </div>
+              </div>
+              <div class="lab-log" id="storage-log" role="status" aria-live="polite">
+                Ready. A₁ has no live references. Queue its deletion to begin.
+              </div>
+              <div class="invariant" id="storage-invariant">
+                <span class="status-dot"></span> Invariant: newly referenced A₂ must survive old
+                work.
+              </div>
+            </div>
+          </section>
+          <section
+            id="panel-replay"
+            class="lab-panel"
+            role="tabpanel"
+            aria-labelledby="tab-replay"
+            hidden
+          >
+            <div class="lab-explainer">
+              <span class="lab-kind">Source-derived scoring / 9 records</span>
+              <h3>How quiet is<br />too quiet?</h3>
+              <p>
+                A lower threshold catches more signals, but can create false alarms. A higher one
+                may miss the event you care about.
+              </p>
+              <div class="range-label">
+                <label for="risk-threshold">Alert threshold</label
+                ><output id="risk-value" for="risk-threshold" aria-label="Selected threshold"
+                  >0.30</output
+                >
+              </div>
+              <input
+                type="range"
+                id="risk-threshold"
+                min="0.05"
+                max="0.80"
+                step="0.01"
+                value="0.30"
+              />
+              <div class="range-ends"><span>Sensitive</span><span>Conservative</span></div>
+              <p class="lab-limit">
+                Browser reimplementation of the repository’s risk rule on its small CSV fixture.
+                This is not a live C++ run or a predictive accuracy study.
+              </p>
+              <a class="small-link" href="#project/event-engine"
+                >Inspect the benchmark boundaries ↗</a
+              >
+            </div>
+            <div class="lab-stage">
+              <div class="stage-top">
+                <span>Labeled fixture / threshold sweep</span
+                ><span id="replay-summary">1 alert</span>
+              </div>
+              <div
+                class="replay-chart"
+                id="replay-chart"
+                role="group"
+                aria-label="Risk scores for nine replay records"
+              ></div>
+              <div class="replay-metrics" aria-live="polite" aria-atomic="true">
+                <div><strong id="metric-tp">1</strong><span>True positive</span></div>
+                <div><strong id="metric-fp">0</strong><span>False positive</span></div>
+                <div><strong id="metric-fn">0</strong><span>Missed alert</span></div>
+                <div><strong id="metric-f1">1.00</strong><span>F1 on fixture</span></div>
+              </div>
+              <p class="lab-log" id="replay-message">
+                One labeled stress event. Eight labeled normal records.
+              </p>
+            </div>
+          </section>
+          <section
+            id="panel-queue"
+            class="lab-panel"
+            role="tabpanel"
+            aria-labelledby="tab-queue"
+            hidden
+          >
+            <div class="lab-explainer">
+              <span class="lab-kind">Conceptual model / 12 slots</span>
+              <h3>Fast is relative<br />to what arrives.</h3>
+              <p>
+                The producer submits events. The consumer processes them. A finite queue turns a
+                rate mismatch into a concrete decision.
+              </p>
+              <div class="range-label">
+                <label for="producer-rate">Producer / events per tick</label
+                ><output id="producer-value" for="producer-rate" aria-label="Selected producer rate"
+                  >3</output
+                >
+              </div>
+              <input type="range" id="producer-rate" min="1" max="6" value="3" />
+              <div class="range-label">
+                <label for="consumer-rate">Consumer / events per tick</label
+                ><output id="consumer-value" for="consumer-rate" aria-label="Selected consumer rate"
+                  >2</output
+                >
+              </div>
+              <input type="range" id="consumer-rate" min="0" max="6" value="2" />
+              <div class="lab-buttons">
+                <button class="button button-lime" id="queue-step">Advance tick →</button
+                ><button class="button button-ghost" id="queue-reset">Reset ↻</button>
+              </div>
+              <p class="lab-limit">
+                A discrete illustrative model, not a throughput benchmark. Rejected submissions are
+                counted separately from accepted work.
+              </p>
+            </div>
+            <div class="lab-stage">
+              <div class="stage-top">
+                <span>Bounded queue</span><span id="queue-tick">Tick 0</span>
+              </div>
+              <div class="queue-flow"><span>Producer →</span><span>→ Consumer</span></div>
+              <div
+                class="queue-slots"
+                id="queue-slots"
+                role="img"
+                aria-label="Queue occupancy: 0 of 12 slots filled"
+              ></div>
+              <div class="replay-metrics">
+                <div><strong id="queue-depth">0</strong><span>Queued</span></div>
+                <div><strong id="queue-accepted">0</strong><span>Accepted</span></div>
+                <div><strong id="queue-processed">0</strong><span>Processed</span></div>
+                <div><strong id="queue-rejected">0</strong><span>Rejected</span></div>
+              </div>
+              <p class="lab-log" id="queue-message" role="status">
+                Set a rate and advance time. What if the consumer stops?
+              </p>
+            </div>
+          </section>
+          <section
+            id="panel-orders"
+            class="lab-panel"
+            role="tabpanel"
+            aria-labelledby="tab-orders"
+            hidden
+          >
+            <div class="lab-explainer">
+              <span class="lab-kind">Policy replay / repository fixture</span>
+              <h3>A favorable price<br />can arrive too late.</h3>
+              <p>
+                Four orders see the same sequence, but their policies make different promises.
+                Advance the market and inspect each transition.
+              </p>
+              <div class="lab-buttons">
+                <button class="button button-lime" id="order-step">Next market tick →</button
+                ><button class="button button-ghost" id="order-reset">Reset ↻</button>
+              </div>
+              <p class="lab-limit">
+                Mirrors the standalone C++ harness. Quotes use its simplified favorable-price rule.
+                No RPC requests, wallet, signing, or real transactions.
+              </p>
+              <a class="small-link" href="#project/order-agent">Read the execution boundaries ↗</a>
+            </div>
+            <div class="lab-stage">
+              <div class="stage-top">
+                <span>Deterministic market sequence</span
+                ><span id="order-market">Awaiting tick 0</span>
+              </div>
+              <div class="order-table-wrap">
+                <table class="order-table">
+                  <caption class="sr-only">
+                    Simulated order states
+                  </caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Policy</th>
+                      <th scope="col">Limit</th>
+                      <th scope="col">State</th>
+                      <th scope="col">Reason</th>
+                    </tr>
+                  </thead>
+                  <tbody id="order-rows"></tbody>
+                </table>
+              </div>
+              <p class="lab-log" id="order-message" role="status">
+                GTC waits. IOC needs an immediate fill. FOK needs full liquidity. GTT has an expiry.
+              </p>
+            </div>
+          </section>
+        </div>
+      </section>
+      <section class="notes-section section-shell" id="notes" aria-labelledby="notes-title">
+        <div class="section-heading reveal">
+          <div>
+            <p class="eyebrow">03 — Field notes</p>
+            <h2 id="notes-title">Making the reasoning<br /><em>visible.</em></h2>
+          </div>
+          <p class="section-description">
+            Ideas worth slowing down for—from storage identity to checking the claims in an
+            AI-assisted build.
+          </p>
+        </div>
+        <div class="notes-grid" id="notes-grid"><article class="note-card reveal"><span class="eyebrow">Storage / 4 min</span><h3>A hash is not a lifetime.</h3><p>Why identity becomes a correctness primitive when work can arrive late.</p><a data-note-id="identity" href="notes/identity/" aria-label="Read A hash is not a lifetime.">Read field note <span>↗</span></a></article><article class="note-card reveal"><span class="eyebrow">Performance / 4 min</span><h3>The boundary is part of the benchmark.</h3><p>A latency number becomes useful when you can say where the clock starts and stops.</p><a data-note-id="benchmarks" href="notes/benchmarks/" aria-label="Read The boundary is part of the benchmark.">Read field note <span>↗</span></a></article><article class="note-card reveal"><span class="eyebrow">AI &amp; ML / 4 min</span><h3>Before the model, define the target.</h3><p>A sophisticated model cannot resolve an ambiguous question for you.</p><a data-note-id="ai-evaluation" href="notes/ai-evaluation/" aria-label="Read Before the model, define the target.">Read field note <span>↗</span></a></article><article class="note-card reveal"><span class="eyebrow">Building with AI / 5 min</span><h3>Generate the draft. Verify the claim.</h3><p>How AI assistance helped build this portfolio—and where the output needed a closer look.</p><a data-note-id="ai-assisted-build" href="notes/ai-assisted-build/" aria-label="Read Generate the draft. Verify the claim.">Read field note <span>↗</span></a></article></div>
+      </section>
+      <section
+        class="glossary-section section-shell"
+        id="glossary"
+        aria-labelledby="glossary-title"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">04 — Plain-English glossary</p>
+            <h2 id="glossary-title">Clear terms.<br /><em>Sharper questions.</em></h2>
+          </div>
+          <p class="section-description">
+            The terminology should help explain the work. Open any term for a definition and a
+            concrete example.
+          </p>
+        </div>
+        <label class="sr-only" for="glossary-search">Filter glossary terms</label
+        ><input
+          id="glossary-search"
+          class="glossary-search"
+          type="search"
+          placeholder="Find a term: p99, backpressure, replay…"
+        />
+        <div class="glossary-grid" id="glossary-grid"><details class="term-card" id="term-aba"><summary>ABA-style race<span aria-hidden="true">+</span></summary><div><span class="eyebrow">Concurrency</span><p>An identity appears unchanged after the underlying resource has changed. Old work can mistake the new resource for the original one.</p><p class="term-example">A delayed delete for object A₁ must not delete a new A₂ just because both contain the same bytes.</p><a data-project-id="snapshot-prune" href="projects/snapshot-prune/">See it in a project ↗</a></div></details><details class="term-card" id="term-backpressure"><summary>Backpressure<span aria-hidden="true">+</span></summary><div><span class="eyebrow">Concurrency</span><p>A way for a slower downstream component to make upstream producers slow down or handle overload explicitly.</p><p class="term-example">A full bounded queue rejects a submission. The producer must retry, wait, or apply a documented drop policy.</p><a data-project-id="event-engine" href="projects/event-engine/">See it in a project ↗</a></div></details><details class="term-card" id="term-bounded-queue"><summary>Bounded queue<span aria-hidden="true">+</span></summary><div><span class="eyebrow">Concurrency</span><p>A waiting buffer with a fixed capacity. It cannot absorb more work indefinitely.</p><p class="term-example">In the queue lab, twelve slots fill when arrivals keep outpacing processing.</p><a data-project-id="event-engine" href="projects/event-engine/">See it in a project ↗</a></div></details><details class="term-card" id="term-spsc"><summary>SPSC<span aria-hidden="true">+</span></summary><div><span class="eyebrow">Concurrency</span><p>Single producer, single consumer: one thread submits items and one thread removes them.</p><p class="term-example">This ownership constraint enables a small lock-free queue design. It does not support arbitrary additional producers.</p><a data-project-id="event-engine" href="projects/event-engine/">See it in a project ↗</a></div></details><details class="term-card" id="term-lock-free"><summary>Lock-free<span aria-hidden="true">+</span></summary><div><span class="eyebrow">Concurrency</span><p>A concurrency property where system-wide progress does not depend on acquiring a mutex. It does not mean every operation always succeeds.</p><p class="term-example">A lock-free queue can still be full and return false from a push attempt.</p><a data-project-id="event-engine" href="projects/event-engine/">See it in a project ↗</a></div></details><details class="term-card" id="term-p99"><summary>p99 latency<span aria-hidden="true">+</span></summary><div><span class="eyebrow">Performance</span><p>The 99th percentile of observed duration: about 99% of the measurements are at or below it.</p><p class="term-example">A reported 10.9 μs p99 for local decisions does not include network delays or prove an end-to-end service guarantee.</p><a data-project-id="event-engine" href="projects/event-engine/">See it in a project ↗</a></div></details><details class="term-card" id="term-throughput"><summary>Throughput<span aria-hidden="true">+</span></summary><div><span class="eyebrow">Performance</span><p>The amount of work completed in a unit of time, under a specified workload and measurement boundary.</p><p class="term-example">Queue handoffs per second and complete requests per second measure different work.</p><a data-project-id="event-engine" href="projects/event-engine/">See it in a project ↗</a></div></details><details class="term-card" id="term-replay"><summary>Deterministic replay<span aria-hidden="true">+</span></summary><div><span class="eyebrow">Validation</span><p>Running the same ordered inputs through a system so its decisions can be inspected and reproduced.</p><p class="term-example">A timestamped CSV can make a market-stress scenario reviewable without relying on a live provider.</p><a data-project-id="event-engine" href="projects/event-engine/">See it in a project ↗</a></div></details><details class="term-card" id="term-precision"><summary>Precision<span aria-hidden="true">+</span></summary><div><span class="eyebrow">ML &amp; evaluation</span><p>Of the alerts produced, the fraction that match labeled alert events.</p><p class="term-example">One correct alert plus one false alarm gives precision of 1 / 2 = 0.5.</p><a data-project-id="event-engine" href="projects/event-engine/">See it in a project ↗</a></div></details><details class="term-card" id="term-recall"><summary>Recall<span aria-hidden="true">+</span></summary><div><span class="eyebrow">ML &amp; evaluation</span><p>Of the labeled alert events, the fraction the system catches.</p><p class="term-example">Missing the only labeled stress event gives recall of zero, even if there are no false alarms.</p><a data-project-id="event-engine" href="projects/event-engine/">See it in a project ↗</a></div></details><details class="term-card" id="term-f1"><summary>F1 score<span aria-hidden="true">+</span></summary><div><span class="eyebrow">ML &amp; evaluation</span><p>The harmonic mean of precision and recall. It summarizes a balance between false alarms and missed events.</p><p class="term-example">A perfect F1 on nine fixture records says nothing by itself about performance on unseen history.</p><a data-project-id="event-engine" href="projects/event-engine/">See it in a project ↗</a></div></details><details class="term-card" id="term-calibration"><summary>Calibration<span aria-hidden="true">+</span></summary><div><span class="eyebrow">ML &amp; evaluation</span><p>Whether probability estimates correspond to how often outcomes actually occur.</p><p class="term-example">Predictions near 0.8 should be correct about 80% of the time over comparable cases. A bounded score alone does not establish this.</p><a data-project-id="sentiment" href="projects/sentiment/">See it in a project ↗</a></div></details><details class="term-card" id="term-label-leakage"><summary>Data leakage<span aria-hidden="true">+</span></summary><div><span class="eyebrow">ML &amp; evaluation</span><p>When training or evaluation uses information that would not legitimately be available for the intended prediction.</p><p class="term-example">Overlapping interview content in both training and validation can make the model look better than it generalizes.</p><a data-project-id="sentiment" href="projects/sentiment/">See it in a project ↗</a></div></details><details class="term-card" id="term-fine-tuning"><summary>Fine-tuning<span aria-hidden="true">+</span></summary><div><span class="eyebrow">ML &amp; evaluation</span><p>Updating a pretrained model using data for a particular task or domain.</p><p class="term-example">Starting from RoBERTa reduces training effort, but still requires meaningful labels and held-out evaluation.</p><a data-project-id="sentiment" href="projects/sentiment/">See it in a project ↗</a></div></details><details class="term-card" id="term-incarnation"><summary>Object incarnation<span aria-hidden="true">+</span></summary><div><span class="eyebrow">Storage</span><p>A specific physical lifetime of an object, distinct from the content it happens to hold.</p><p class="term-example">A₁ and A₂ can share content hash H while requiring different deletion targets.</p><a data-project-id="snapshot-prune" href="projects/snapshot-prune/">See it in a project ↗</a></div></details><details class="term-card" id="term-gc"><summary>Mark-and-sweep collection<span aria-hidden="true">+</span></summary><div><span class="eyebrow">Storage</span><p>A reclamation approach that identifies reachable objects, then removes candidates judged unreachable.</p><p class="term-example">If uploads continue during collection, the design must keep new references safe while its observations become stale.</p><a data-project-id="snapshot-prune" href="projects/snapshot-prune/">See it in a project ↗</a></div></details><details class="term-card" id="term-lost-ack"><summary>Lost acknowledgement<span aria-hidden="true">+</span></summary><div><span class="eyebrow">Distributed systems</span><p>An operation may have succeeded remotely, but the caller never receives confirmation.</p><p class="term-example">Retrying a deletion after a timeout requires reasoning about both “already happened” and “not yet happened.”</p><a data-project-id="snapshot-prune" href="projects/snapshot-prune/">See it in a project ↗</a></div></details><details class="term-card" id="term-idempotency"><summary>Idempotency<span aria-hidden="true">+</span></summary><div><span class="eyebrow">Distributed systems</span><p>Repeating an operation has the same intended effect as performing it once, within the operation’s defined identity and scope.</p><p class="term-example">A retry is only safe if it cannot accidentally act on a replacement resource.</p><a data-project-id="snapshot-prune" href="projects/snapshot-prune/">See it in a project ↗</a></div></details><details class="term-card" id="term-circuit-breaker"><summary>Circuit breaker<span aria-hidden="true">+</span></summary><div><span class="eyebrow">Reliability</span><p>A mechanism that stops repeated calls to a failing dependency, then probes for recovery.</p><p class="term-example">Closed allows calls, open blocks them, and half-open tests whether the dependency has recovered.</p><a data-project-id="event-engine" href="projects/event-engine/">See it in a project ↗</a></div></details><details class="term-card" id="term-fault-injection"><summary>Fault injection<span aria-hidden="true">+</span></summary><div><span class="eyebrow">Validation</span><p>Deliberately introducing failures to examine recovery behavior and safety properties.</p><p class="term-example">Kill a process after an object write but before its acknowledgement, then inspect the recovered state.</p><a data-project-id="snapshot-prune" href="projects/snapshot-prune/">See it in a project ↗</a></div></details><details class="term-card" id="term-invariant"><summary>Invariant<span aria-hidden="true">+</span></summary><div><span class="eyebrow">Correctness</span><p>A property that must remain true across the system’s allowed states and operations.</p><p class="term-example">Accepted queue events equal processed events plus events still waiting.</p><a data-project-id="event-engine" href="projects/event-engine/">See it in a project ↗</a></div></details><details class="term-card" id="term-fencing"><summary>Fencing<span aria-hidden="true">+</span></summary><div><span class="eyebrow">Distributed systems</span><p>Preventing an old owner or stale operation from making changes after its authority has been replaced.</p><p class="term-example">A worker that loses a lease may keep running; a commit boundary must reject its stale authority.</p><a data-project-id="compute-platform" href="projects/compute-platform/">See it in a project ↗</a></div></details><details class="term-card" id="term-tif"><summary>Time-in-force<span aria-hidden="true">+</span></summary><div><span class="eyebrow">Execution policies</span><p>An order policy defining how long an order remains eligible and when it must be canceled or expired.</p><p class="term-example">GTT can expire before a favorable quote arrives; FOK requires enough liquidity for a complete fill.</p><a data-project-id="order-agent" href="projects/order-agent/">See it in a project ↗</a></div></details><details class="term-card" id="term-rpc"><summary>JSON-RPC<span aria-hidden="true">+</span></summary><div><span class="eyebrow">Infrastructure</span><p>A request-and-response protocol for calling remote methods using JSON messages.</p><p class="term-example">The order agent uses Ethereum JSON-RPC to read balances and quotes. A read is separate from signing and submitting a transaction.</p><a data-project-id="order-agent" href="projects/order-agent/">See it in a project ↗</a></div></details></div>
+        <p class="glossary-empty" id="glossary-empty" role="status" hidden>
+          No matching terms. Try “queue”, “model”, or “storage”.
+        </p>
+      </section>
+      <section class="about-section section-shell" id="about" aria-labelledby="about-title">
+        <div class="about-left">
+          <p class="eyebrow">05 — The person at the keyboard</p>
+          <h2 id="about-title">
+            Close to the metal.<br /><em>Curious about<br />the whole thing.</em>
+          </h2>
+          <p>
+            I’m a software engineer on Oracle’s Database Security team and a Computer Science
+            graduate from BITS Pilani, Goa.
+          </p>
+          <p>
+            My work spans memory safety, authentication, access control, storage lifecycles, and
+            concurrent event processing. Side projects let me explore the same systems questions
+            through different constraints.
+          </p>
+          <a href="resume.html" target="_blank" rel="noopener" class="underlined"
+            >The full resume ↗</a
+          >
+          <div class="about-initial" aria-hidden="true">hb<span>↗</span></div>
+        </div>
+        <div class="timeline">
+          <article>
+            <span class="timeline-dot"></span>
+            <div class="timeline-date">Jan 2025 — Present</div>
+            <h3>Oracle</h3>
+            <p class="timeline-role">Software Engineer / Database Security</p>
+            <p>
+              Investigating C-based RDBMS defects with GDB, core dumps, trace files, and internal
+              diagnostic tools. Work covers memory corruption, authentication, role systems, session
+              state, and backward compatibility.
+            </p>
+            <div class="achievement">
+              <strong>8×</strong
+              ><span
+                >Oracle Label Security capacity enhancement<br /><b
+                  >VARCHAR2(4000) → VARCHAR2(32000)</b
+                ></span
+              >
+            </div>
+            <p class="fine">
+              Experience from the supplied resume. Employer source and internal diagnostic details
+              are not included.
+            </p>
+          </article>
+          <article>
+            <span class="timeline-dot"></span>
+            <div class="timeline-date">May — Jul 2023</div>
+            <h3>iQuadra Information Services</h3>
+            <p class="timeline-role">Machine Learning Intern / Remote</p>
+            <p>
+              Fine-tuned a RoBERTa-based sentiment model and developed computer-vision pipelines for
+              candidate assessment.
+            </p>
+          </article>
+          <article>
+            <span class="timeline-dot"></span>
+            <div class="timeline-date">2021 — 2025</div>
+            <h3>BITS Pilani, Goa Campus</h3>
+            <p class="timeline-role">B.E. (Hons.) Computer Science / CGPA 8.7</p>
+            <p>Operating systems, distributed systems, databases, networks, and algorithms.</p>
+            <div class="education-tags">
+              <span>NTSE Scholar</span><span>JEE Mains 99.69 percentile</span
+              ><span>JEE Advanced AIR 3547</span>
+            </div>
+          </article>
+        </div>
+      </section>
+      <section class="toolkit-section section-shell">
+        <div class="toolkit-intro">
+          <p class="eyebrow">Tools, chosen for the job</p>
+          <h2>Different layers.<br />Same curiosity.</h2>
+        </div>
+        <div class="toolkit-grid">
+          <div>
+            <span>01 / Languages</span>
+            <p>C · C++ · Python<br />Java · SQL · PL/SQL</p>
+          </div>
+          <div>
+            <span>02 / Data & infrastructure</span>
+            <p>Oracle · PostgreSQL · Kafka<br />Redis · HDFS · ZooKeeper · SQLite</p>
+          </div>
+          <div>
+            <span>03 / Workflow</span>
+            <p>Linux · GDB · Docker · Git<br />CMake · Gradle · Shell · REST</p>
+          </div>
+          <div>
+            <span>04 / Systems interests</span>
+            <p>Concurrency · Fault tolerance<br />Storage · High availability · Latency</p>
+          </div>
+        </div>
+      </section>
+      <section class="contact-section section-shell" id="contact">
+        <div class="contact-top">
+          <p class="eyebrow"><span class="status-dot"></span> Start with an interesting question</p>
+          <a href="#home" class="back-top">Back to top ↑</a>
+        </div>
+        <h2>Let’s build something<br />worth <em>understanding.</em></h2>
+        <div class="contact-bottom">
+          <a class="email-link" href="mailto:harshvardhanb11@gmail.com"
+            >harshvardhanb11@gmail.com <span>↗</span></a
+          ><button
+            class="copy-email icon-button"
+            aria-label="Copy email address"
+            title="Copy email address"
+          >
+            ⧉</button
+          ><a
+            class="github-link"
+            href="https://github.com/harshvardhanb11"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GitHub ↗</a
+          >
+        </div>
+        <p class="contact-small">
+          Database security, distributed infrastructure, performance, and thoughtful side projects.
+        </p>
+        <div id="copy-status" class="sr-only" role="status"></div>
+      </section>
+    </main>
+    <footer class="site-footer section-shell">
+      <a class="wordmark footer-mark" href="#home">h·b <span>Harshvardhan Birla</span></a
+      ><span>Built around the work. Made to be explored.</span>
+      <div>
+        <button class="text-button" id="open-colophon">About this site</button><span>© 2026</span>
+      </div>
+    </footer>
+    <dialog id="reader" class="reader-dialog" aria-labelledby="reader-title">
+      <div class="reader-bar">
+        <a href="#work" class="reader-back" id="reader-close">← Back to the work</a
+        ><span class="mono">Field notes / Harshvardhan Birla</span
+        ><button class="icon-button" id="reader-x" aria-label="Close case study">×</button>
+      </div>
+      <div id="reader-content"><h2 id="reader-title" class="sr-only">Engineering story</h2></div>
+    </dialog>
+    <dialog id="search-dialog" class="search-dialog" aria-labelledby="search-title">
+      <div class="search-head">
+        <h2 id="search-title">Find a project or idea</h2>
+        <button class="icon-button" id="search-close" aria-label="Close search">×</button>
+      </div>
+      <label class="sr-only" for="site-search">Search projects and notes</label
+      ><input
+        id="site-search"
+        type="search"
+        placeholder="Try “storage”, “C++”, or “tradeoffs”…"
+        autocomplete="off"
+      />
+      <div id="search-results" class="search-results"></div>
+      <p class="search-hint">Tab to a result · Enter to open · Esc to close</p>
+    </dialog>
+    <noscript
+      ><div class="noscript">
+        This portfolio uses JavaScript for case studies and interactive labs. You can still
+        <a href="resume.html">read the resume</a> or
+        <a href="https://github.com/harshvardhanb11">explore the GitHub projects</a>.
+      </div></noscript
+    >
+  </body>
+</html>

@@ -1,0 +1,41 @@
+Curve DEX limit-order terminal simulation
+=========================================
+No RPC endpoint, wallet, private key, curl, or JSON dependency is required.
+This deterministic run demonstrates GTC/GTT/IOC/FOK policy behavior,
+slippage-style price checks, liquidity checks, and order state transitions.
+
+Initial orders
+id          tif  limit     amount    expiry  active
+SIM_GTC_1  GTC    1.0200    1000000       0       0
+SIM_IOC_1  IOC    1.0300    1000000       0       0
+SIM_FOK_1  FOK    1.0200    1000000       0       2
+SIM_GTT_1  GTT    1.0400    1000000       3       0
+
+market_step=0 price=0.9950 liquidity=2000000
+  SIM_GTC_1 pending price_not_met
+  SIM_IOC_1 canceled price_not_met
+  SIM_GTT_1 pending price_not_met
+
+market_step=1 price=1.0060 liquidity=1500000
+  SIM_GTC_1 pending price_not_met
+  SIM_GTT_1 pending price_not_met
+
+market_step=2 price=1.0210 liquidity=700000
+  SIM_GTC_1 filled price=1.0210
+  SIM_FOK_1 canceled insufficient_liquidity
+  SIM_GTT_1 pending price_not_met
+
+market_step=3 price=1.0350 liquidity=3000000
+  SIM_GTT_1 pending price_not_met
+
+market_step=4 price=1.0410 liquidity=2500000
+  SIM_GTT_1 expired
+
+Final order state
+id          tif  status      limit   fill    step  reason
+SIM_GTC_1  GTC  FILLED        1.0200  1.0210     2  limit_crossed
+SIM_IOC_1  IOC  CANCELED      1.0300       -     -  price_not_met
+SIM_FOK_1  FOK  CANCELED      1.0200       -     -  insufficient_liquidity
+SIM_GTT_1  GTT  EXPIRED       1.0400       -     -  time_expired
+
+summary filled=1 canceled=2 expired=1 pending=0

@@ -1,0 +1,85 @@
+{
+  "date": "2026-10-22",
+  "scope": "Static export and DOM checks; no real browser layout or device testing.",
+  "pages": 15,
+  "localReferences": 229,
+  "localReferenceErrors": [],
+  "htmlErrors": [],
+  "accessibilityViolations": [],
+  "cssErrors": [],
+  "contrast": [
+    {
+      "foreground": "#f0f0e7",
+      "background": "#101815",
+      "ratio": 15.75,
+      "passesAA": true
+    },
+    {
+      "foreground": "#a3b1a5",
+      "background": "#17211c",
+      "ratio": 7.39,
+      "passesAA": true
+    },
+    {
+      "foreground": "#d4ed95",
+      "background": "#101815",
+      "ratio": 14.05,
+      "passesAA": true
+    },
+    {
+      "foreground": "#e9a385",
+      "background": "#17211c",
+      "ratio": 7.9,
+      "passesAA": true
+    },
+    {
+      "foreground": "#1b3125",
+      "background": "#f3f1e9",
+      "ratio": 12.28,
+      "passesAA": true
+    },
+    {
+      "foreground": "#536757",
+      "background": "#e9ebe1",
+      "ratio": 5.06,
+      "passesAA": true
+    },
+    {
+      "foreground": "#355d28",
+      "background": "#f3f1e9",
+      "ratio": 6.76,
+      "passesAA": true
+    },
+    {
+      "foreground": "#9c4a32",
+      "background": "#e9ebe1",
+      "ratio": 5.07,
+      "passesAA": true
+    },
+    {
+      "foreground": "#5d6c61",
+      "background": "#eeeae0",
+      "ratio": 4.62,
+      "passesAA": true
+    },
+    {
+      "foreground": "#5a6b58",
+      "background": "#eeeae0",
+      "ratio": 4.75,
+      "passesAA": true
+    },
+    {
+      "foreground": "#586b51",
+      "background": "#eeeae0",
+      "ratio": 4.81,
+      "passesAA": true
+    },
+    {
+      "foreground": "#5c6f55",
+      "background": "#eeeae0",
+      "ratio": 4.53,
+      "passesAA": true
+    }
+  ],
+  "passed": true
+}
