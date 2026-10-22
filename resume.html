@@ -5,394 +5,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Resume of Harshvardhan Birla, Software Engineer at Oracle, Database Security."
+      content="Harshvardhan Birla's resume, typeset from his LaTeX source."
     />
-    <title>Harshvardhan Birla — Resume</title>
+    <title>Resume — Harshvardhan Birla</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <style>
-      * {
-        box-sizing: border-box;
+      :root {
+        color-scheme: light;
+        font-family: system-ui, sans-serif;
+        color: #17221d;
+        background: #f3f1e9;
       }
       body {
-        font:
-          13px/1.6 Arial,
-          Helvetica,
-          sans-serif;
-        color: #213329;
-        background: #e9ece4;
         margin: 0;
       }
-      main {
-        max-width: 850px;
-        margin: 35px auto;
-        background: #fffef9;
-        padding: 50px 60px;
-        box-shadow: 0 5px 35px #19291a0b;
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        flex-wrap: wrap;
+        padding: 24px max(24px, calc((100vw - 1100px) / 2));
+        background: #fff;
+        border-bottom: 1px solid #d9ddd7;
       }
       h1 {
-        font-size: 29px;
-        letter-spacing: -1px;
-        margin: 0 0 6px;
-      }
-      h2 {
-        font-size: 11px;
-        letter-spacing: 1.8px;
-        text-transform: uppercase;
-        margin: 27px 0 13px;
-        padding-bottom: 7px;
-        border-bottom: 1px solid #ced7c8;
-        color: #45633b;
-      }
-      h3 {
-        font-size: 14px;
+        font-size: clamp(24px, 4vw, 36px);
         margin: 0;
       }
       p {
-        margin: 5px 0;
+        font-size: 17px;
+        line-height: 1.6;
+        margin: 8px 0 0;
+      }
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
       }
       a {
-        color: inherit;
-        text-underline-offset: 3px;
+        color: #24533b;
+        font-size: 17px;
+        text-underline-offset: 4px;
       }
-      .contact {
-        font-size: 11px;
-        color: #52634d;
-        display: flex;
-        gap: 14px;
-        flex-wrap: wrap;
+      a:focus-visible {
+        outline: 3px solid #24533b;
+        outline-offset: 5px;
       }
-      .row {
-        display: flex;
-        justify-content: space-between;
-        gap: 20px;
-        align-items: start;
+      main {
+        max-width: 1100px;
+        margin: 28px auto;
+        padding: 0 20px;
       }
-      .date {
-        font-size: 10px;
-        color: #63745c;
-        white-space: nowrap;
+      object {
+        display: block;
+        width: 100%;
+        height: 1100px;
+        max-height: calc(100vh - 170px);
+        min-height: 500px;
+        border: 1px solid #d9ddd7;
+        background: #fff;
       }
-      .role {
-        font-size: 11px;
-        color: #63745c;
-        margin: 2px 0 7px;
+      object p {
+        padding: 24px;
       }
-      ul {
-        margin: 7px 0 19px;
-        padding-left: 17px;
-      }
-      li {
-        padding-left: 3px;
-        margin: 4px 0;
-        font-size: 11px;
-      }
-      .skills p {
-        font-size: 11px;
-      }
-      .toolbar {
-        max-width: 850px;
-        margin: 25px auto 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 5px;
-        font-size: 11px;
-      }
-      .toolbar button {
-        font: inherit;
-        background: #243b2a;
-        color: #f6f4e9;
-        border: 0;
-        padding: 10px 17px;
-        cursor: pointer;
-      }
-      .note {
-        font-size: 9px;
-        color: #63745c;
-        border-top: 1px solid #ced7c8;
-        margin-top: 26px;
-        padding-top: 13px;
-      }
-      .project-title a {
-        text-decoration: none;
-      }
-      .project-title a:hover {
-        text-decoration: underline;
-      }
-      @page {
-        size: A4;
-        margin: 15mm 16mm;
-      }
-      @media print {
-        body {
-          background: white;
-          font-size: 10px;
+      @media (max-width: 600px) {
+        header {
+          padding: 24px;
         }
         main {
-          margin: 0;
-          padding: 0;
-          box-shadow: none;
-          max-width: none;
+          padding: 0 12px;
         }
-        .toolbar {
-          display: none;
-        }
-        h1 {
-          font-size: 25px;
-        }
-        h2 {
-          margin-top: 19px;
-          margin-bottom: 10px;
-        }
-        li {
-          font-size: 10px;
-          margin: 3px 0;
-        }
-        ul {
-          margin-bottom: 14px;
-        }
-        .role,
-        .skills p {
-          font-size: 10px;
-        }
-        h3 {
-          font-size: 12px;
-        }
-        .row {
-          break-after: avoid;
-        }
-        li {
-          break-inside: avoid;
-        }
-        .note {
-          font-size: 8px;
-        }
-        .contact {
-          font-size: 10px;
-        }
-      }
-      @media (max-width: 650px) {
-        main {
-          margin: 20px 12px;
-          padding: 30px 25px;
-        }
-        .toolbar {
-          margin: 20px 16px 0;
-        }
-        .row {
-          gap: 12px;
-        }
-        .date {
-          font-size: 8px;
-          white-space: normal;
-          text-align: right;
-          min-width: 75px;
-        }
-        h1 {
-          font-size: 25px;
-        }
-        .contact {
-          gap: 8px;
-          font-size: 10px;
+        object {
+          min-height: 550px;
+          max-height: none;
+          height: 78vh;
         }
       }
     </style>
   </head>
   <body>
-    <div class="toolbar">
-      <a href="index.html">← Portfolio</a
-      ><button id="print-resume" type="button">Print / Save as PDF ↗</button>
-    </div>
-    <main>
-      <header>
+    <header>
+      <div>
         <h1>Harshvardhan Birla</h1>
-        <div class="contact">
-          <a href="mailto:harshvardhanb11@gmail.com">harshvardhanb11@gmail.com</a
-          ><a href="tel:+918780667597">+91 8780667597</a
-          ><a href="https://github.com/harshvardhanb11" target="_blank" rel="noopener noreferrer"
-            >github.com/harshvardhanb11</a
-          ><span>Bengaluru, India</span>
-        </div>
-      </header>
-      <section>
-        <h2>Experience</h2>
-        <div class="row">
-          <h3>Oracle</h3>
-          <span class="date">Jan 2025 – Present · Bengaluru</span>
-        </div>
-        <p class="role">Software Engineer · Database Security Team</p>
-        <ul>
-          <li>
-            Investigated and resolved customer-reported and internally detected production defects
-            in C-based Oracle RDBMS infrastructure, including memory corruption, null-pointer
-            crashes, stack-buffer overflows, ORA-07445/ORA-00600 failures, and reliability
-            regressions using GDB, core dumps, trace files, and internal diagnostic tooling.
-          </li>
-          <li>
-            Designed and implemented an Oracle Label Security enhancement expanding supported label
-            capacity by 8×, from VARCHAR2(4000) to VARCHAR2(32000), while preserving database-level
-            access-control behavior.
-          </li>
-          <li>
-            Fixed security-critical defects including heap overwrites, format-string
-            vulnerabilities, uninitialized memory, and SQL/LDAP injection exposure.
-          </li>
-          <li>
-            Owned investigations across Oracle Label Security and password-file components, covering
-            authentication, role systems, session state, access control, and client–database
-            consistency.
-          </li>
-          <li>
-            Integrated features from Oracle 26ai/23c into 19c, adapting low-level internals while
-            maintaining backward compatibility and consistent release behavior.
-          </li>
-        </ul>
-        <div class="row">
-          <h3>iQuadra Information Services Pvt. Ltd.</h3>
-          <span class="date">May – Jul 2023 · Remote</span>
-        </div>
-        <p class="role">Machine Learning Intern</p>
-        <ul>
-          <li>
-            Fine-tuned a RoBERTa-based sentiment model and developed computer-vision pipelines for
-            candidate assessment.
-          </li>
-        </ul>
-      </section>
-      <section>
-        <h2>Selected projects</h2>
-        <div class="row">
-          <h3 class="project-title">
-            <a href="index.html#project/snapshot-prune">Live Snapshot Prune</a>
-          </h3>
-          <span class="date">2026</span>
-        </div>
-        <p class="role">Python · PostgreSQL · Docker · Distributed Storage</p>
-        <ul>
-          <li>
-            Designed a backup storage system with transactional metadata, independent object
-            storage, snapshot APIs, and online mark-and-sweep garbage collection alongside
-            concurrent uploads, restores, and deletions.
-          </li>
-          <li>
-            Distinguished logical content identity from physical object incarnations to prevent
-            delayed deletion from removing newly uploaded, deduplicated data during ABA-style races.
-          </li>
-          <li>
-            Built a fault-injection verifier covering lost acknowledgements, crashes, restarts,
-            concurrency, orphan reclamation, and final invariants.
-          </li>
-        </ul>
-        <div class="row">
-          <h3 class="project-title">
-            <a href="https://github.com/harshvardhanb11/stablecoin_depeg_prediction_system"
-              >Low-Latency C++ Event Processing Engine</a
-            >
-          </h3>
-          <span class="date">Jul 2025</span>
-        </div>
-        <p class="role">C++17 · Multithreading · Lock-Free Queue · SQLite</p>
-        <ul>
-          <li>
-            Built a modular event-processing backend with live and replayable sources, provider
-            circuit breakers, explainable alerts, and SQLite-backed persistence paths.
-          </li>
-          <li>
-            Implemented lock-free inter-thread handoff. Reported local benchmarks: 8.37M queue
-            events/sec and 10.9 μs p99 decision latency, measured separately and excluding network
-            latency.
-          </li>
-          <li>
-            Developed unit tests, deterministic replay, threshold-sweep backtesting, latency
-            benchmarks, and labeled failure scenarios.
-          </li>
-        </ul>
-        <div class="row">
-          <h3 class="project-title">
-            <a href="index.html#project/distributed-storage">Distributed Storage Engine</a>
-          </h3>
-          <span class="date">Jul – Nov 2023</span>
-        </div>
-        <p class="role">Apache Kafka · Replication · Fault Tolerance</p>
-        <ul>
-          <li>
-            Built multi-node storage with scalable Kafka ingestion, partitioned communication, and
-            durable data movement.
-          </li>
-          <li>
-            Implemented replicated metadata and dual-storage fault tolerance supporting access and
-            recovery during tested single-node failures.
-          </li>
-          <li>
-            Used partitioning and parallel consumers to improve inter-node communication and
-            concurrent processing.
-          </li>
-        </ul>
-        <div class="row">
-          <h3 class="project-title">
-            <a href="index.html#project/compute-platform"
-              >Distributed Compute Orchestration Platform</a
-            >
-          </h3>
-          <span class="date">Dec 2023 – Apr 2024</span>
-        </div>
-        <p class="role">HDFS · Redis · ZooKeeper · Distributed Systems</p>
-        <ul>
-          <li>
-            Engineered multi-node task orchestration with HDFS for durable data, Redis for
-            low-latency state, and ZooKeeper for coordination.
-          </li>
-        </ul>
-        <div class="row">
-          <h3 class="project-title">
-            <a href="https://github.com/harshvardhanb11/Loopbreaker">Loopbreaker</a>
-          </h3>
-          <span class="date">Public side project</span>
-        </div>
-        <p class="role">JavaScript · Manifest V3 · Browser APIs</p>
-        <ul>
-          <li>
-            Built an experimental browser extension with unique-video counting, active watch-time
-            tracking, local session recovery, and pause interventions for Instagram and YouTube web.
-          </li>
-        </ul>
-      </section>
-      <section class="skills">
-        <h2>Technical skills</h2>
-        <p><b>Languages:</b> C, C++, Python, Java, SQL, PL/SQL</p>
-        <p>
-          <b>Data & infrastructure:</b> Oracle RDBMS, PostgreSQL, Apache Kafka, ZooKeeper, Redis,
-          HDFS, SQLite
-        </p>
-        <p>
-          <b>Systems:</b> Distributed systems, storage, databases, concurrency, fault tolerance,
-          high availability, low-latency systems
-        </p>
-        <p><b>Tools:</b> Linux, GDB, Docker, Git, CMake, Gradle, shell scripting, REST</p>
-      </section>
-      <section>
-        <h2>Education & achievements</h2>
-        <div class="row">
-          <h3>BITS Pilani, Goa Campus</h3>
-          <span class="date">2021 – 2025</span>
-        </div>
-        <p class="role">B.E. (Hons.) Computer Science · CGPA 8.7</p>
-        <p style="font-size: 11px">
-          Operating Systems, Distributed Systems, Database Systems, Computer Networks,
-          Object-Oriented Programming, Design and Analysis of Algorithms.
-        </p>
-        <p style="font-size: 11px; margin-top: 10px">
-          NTSE Scholar (Top 1,000 nationwide) · JEE Mains: 99.69 percentile · JEE Advanced: AIR 3547
-        </p>
-      </section>
-      <p class="note">
-        Based on the supplied resume and public project documentation. Public repositories for
-        selected side projects are linked; employer source code is not included. Benchmark scope is
-        explicitly stated.
-      </p>
+        <p>Resume</p>
+      </div>
+      <nav aria-label="Resume links">
+        <a href="index.html">Back to portfolio</a
+        ><a href="resume/resume.pdf" download="Harshvardhan-Birla-Resume.pdf">Download PDF</a
+        ><a href="resume/resume.tex" download="Harshvardhan-Birla-Resume.tex">LaTeX source</a>
+      </nav>
+    </header>
+    <main>
+      <object
+        data="resume/resume.pdf"
+        type="application/pdf"
+        aria-label="Harshvardhan Birla's resume PDF"
+      >
+        <p><a href="resume/resume.pdf">Open the resume PDF</a> to read or download it.</p>
+      </object>
     </main>
-    <script>
-      document.getElementById('print-resume').addEventListener('click', () => window.print());
-    </script>
   </body>
 </html>

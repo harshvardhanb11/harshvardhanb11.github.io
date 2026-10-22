@@ -17,7 +17,7 @@
   $$('[data-lab]').forEach((button) => {
     button.addEventListener('click', () => window.selectLab(button.dataset.lab));
     button.addEventListener('keydown', (e) => {
-      const tabs = $$('[data-lab]'),
+      const tabs = $$('[data-lab]').filter((tab) => !tab.hidden),
         index = tabs.indexOf(button);
       let next = null;
       if (e.key === 'ArrowRight') next = (index + 1) % tabs.length;
@@ -171,5 +171,6 @@
   renderOrders();
   const requestedLab = new URLSearchParams(location.search).get('lab');
   if (['storage', 'replay', 'queue', 'orders'].includes(requestedLab))
-    window.selectLab(requestedLab);
+    window.openProjectDemo?.(requestedLab);
+  else if (location.hash === '#playground') window.openProjectDemo?.('storage');
 })();

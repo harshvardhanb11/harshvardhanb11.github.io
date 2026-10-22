@@ -21,8 +21,6 @@
   const templates = window.PortfolioTemplates;
   if (!$('#project-grid').children.length)
     $('#project-grid').innerHTML = templates.projects(data.projects, !!window.PORTABLE);
-  if (!$('#notes-grid').children.length)
-    $('#notes-grid').innerHTML = templates.notes(data.notes, !!window.PORTABLE);
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a[data-project-id],a[data-note-id]');
     if (!a || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
@@ -34,19 +32,6 @@
     else location.hash = hash;
   });
   const terms = window.GLOSSARY || [];
-  if (!$('#glossary-grid').children.length)
-    $('#glossary-grid').innerHTML = templates.glossary(terms, !!window.PORTABLE);
-  $('#glossary-search').addEventListener('input', () => {
-    const q = $('#glossary-search').value.trim().toLowerCase();
-    let count = 0;
-    terms.forEach((t) => {
-      const el = $('#term-' + t.id);
-      el.hidden = ![t.name, t.definition, t.group, t.example].join(' ').toLowerCase().includes(q);
-      if (!el.hidden) count++;
-    });
-    $('#glossary-empty').hidden = count > 0;
-  });
-
   function applyTheme(theme) {
     root.dataset.theme = theme;
     $('#theme-toggle').setAttribute(
@@ -66,39 +51,6 @@
       localStorage.setItem('hb-portfolio-theme', theme);
     } catch {}
   });
-  function updateTime() {
-    try {
-      $('#local-time').textContent =
-        new Intl.DateTimeFormat('en-GB', {
-          timeZone: 'Asia/Kolkata',
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: false,
-        }).format(new Date()) + ' IST';
-    } catch {
-      $('#local-time').textContent = 'IST';
-    }
-  }
-  updateTime();
-  setInterval(updateTime, 60000);
-
-  $$('[data-filter]').forEach((button) =>
-    button.addEventListener('click', () => {
-      $$('[data-filter]').forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
-      let shown = 0;
-      $$('.project-card').forEach((card) => {
-        const visible =
-          button.dataset.filter === 'all' || card.dataset.category === button.dataset.filter;
-        card.hidden = !visible;
-        if (visible) {
-          shown++;
-          card.classList.add('visible');
-        }
-      });
-      $('#work-count').textContent =
-        `${String(shown).padStart(2, '0')} project${shown === 1 ? '' : 's'} / ${button.dataset.filter === 'all' ? '03 disciplines' : button.textContent.trim()}`;
-    }),
-  );
   $('#menu-toggle').addEventListener('click', () => {
     const open = $('#menu-toggle').getAttribute('aria-expanded') !== 'true';
     $('#menu-toggle').setAttribute('aria-expanded', String(open));
@@ -120,13 +72,21 @@
     }
   });
 
+  function parkDemos() {
+    const demo = $('#playground'),
+      store = $('#demo-store');
+    if (demo && store) {
+      store.appendChild(demo);
+      demo.hidden = true;
+    }
+  }
   function openReader(html, title) {
+    parkDemos();
     if (!reader.open) {
       scrollBeforeReader = window.scrollY;
       readerTrigger = document.activeElement;
       readerOpenedDirect = !lastRoute && /^#(project|note)\//.test(location.hash);
-      if (readerOpenedDirect)
-        readerReturnHash = location.hash.startsWith('#note/') ? '#notes' : '#work';
+      if (readerOpenedDirect) readerReturnHash = '#work';
       else if (lastRoute && !/^#(project|note)\//.test(lastRoute) && lastRoute !== '#colophon')
         readerReturnHash = lastRoute;
       document.body.style.overflow = 'hidden';
@@ -157,8 +117,8 @@
       ? `<details class="reader-terms"><summary>Key terms in plain English <span>+</span></summary>${projectTerms.map((t) => `<div><h3>${escape(t.name)}</h3><p>${escape(t.definition)}</p></div>`).join('')}</details>`
       : '';
     openReader(
-      `<header class="reader-hero"><p class="eyebrow">Project ${project.number} / ${escape(project.type)} / ${escape(project.evidence)}</p><h1 id="reader-title">${escape(project.name).replace('\n', ' ')}</h1><p class="reader-subtitle">${escape(project.subtitle)}</p><div class="reader-facts">${project.facts.map((f) => `<div><span>${escape(f[0])}</span><b>${escape(f[1])}</b></div>`).join('')}</div></header>
-      <div class="reader-layout"><aside class="reader-toc" aria-label="In this case study"><span>IN THIS STORY</span>${toc}${project.repo ? `<a href="${data.github}/${project.repo}" target="_blank" rel="noopener noreferrer">Open repository ↗</a>` : ''}</aside><article class="reader-article"><p class="reader-intro">${escape(project.intro)}</p>${templates.architecture(project.id)}${termMarkup}${project.sections.map((s, i) => `<section class="reader-chapter" id="chapter-${project.id}-${i}"><h2>${escape(s[0])}</h2><p>${escape(s[1])}</p></section>`).join('')}${templates.decisions(window.DESIGN_DECISIONS?.[project.id])}<blockquote class="reader-question">${escape(project.question)}</blockquote>${project.lab ? `<button class="button button-lime" data-jump-lab="${project.lab}">Explore the interactive lab ↗</button>` : ''}${sources ? `<section class="reader-sources"><h2>Go to the evidence</h2>${sources}</section>` : ''}<p class="reader-provenance">${escape(project.provenance)}</p><div class="reader-actions"><button class="text-button" id="copy-case-link">Copy story link ⧉</button><a href="#project/${next.id}">Next: ${escape(next.short)} →</a></div></article></div>`,
+      `<header class="reader-hero"><p class="eyebrow">Project ${project.number} / ${escape(project.type)}</p><h1 id="reader-title">${escape(project.name).replace('\n', ' ')}</h1><p class="reader-tagline">${escape(project.tagline).replace('\n', ' ')}</p><p class="reader-subtitle">${escape(project.subtitle)}</p><div class="reader-facts">${project.facts.map((f) => `<div><span>${escape(f[0])}</span><b>${escape(f[1])}</b></div>`).join('')}</div></header>
+      <div class="reader-layout"><aside class="reader-toc" aria-label="In this case study"><span>IN THIS STORY</span>${toc}${project.repo ? `<a href="${data.github}/${project.repo}" target="_blank" rel="noopener noreferrer">Open repository ↗</a>` : ''}</aside><article class="reader-article"><p class="reader-intro">${escape(project.intro)}</p>${project.lab ? `<button class="button button-lime demo-open-button" data-jump-lab="${project.lab}" aria-expanded="false" aria-controls="reader-demo-slot">Try the interactive demo ↓</button><div id="reader-demo-slot"></div>` : ''}${templates.architecture(project.id)}${termMarkup}${project.sections.map((s, i) => `<section class="reader-chapter" id="chapter-${project.id}-${i}"><h2>${escape(s[0])}</h2><p>${escape(s[1])}</p></section>`).join('')}${templates.decisions(window.DESIGN_DECISIONS?.[project.id])}${sources ? `<section class="reader-sources"><h2>Explore the code</h2>${sources}</section>` : ''}<div class="reader-actions"><button class="text-button" id="copy-case-link">Copy story link ⧉</button><a href="#project/${next.id}">Next: ${escape(next.short)} →</a></div></article></div>`,
       project.short,
     );
     $$('[data-chapter]', reader).forEach((a) =>
@@ -172,8 +132,22 @@
     const labButton = $('[data-jump-lab]', reader);
     if (labButton)
       labButton.addEventListener('click', () => {
-        closeReader('#playground');
+        const demo = $('#playground');
+        const opening = labButton.getAttribute('aria-expanded') !== 'true';
+        labButton.setAttribute('aria-expanded', String(opening));
+        if (!opening) {
+          parkDemos();
+          return;
+        }
+        $('#reader-demo-slot').appendChild(demo);
+        demo.hidden = false;
+        const allowed = project.id === 'event-engine' ? ['replay', 'queue'] : [project.lab];
+        $$('[data-lab]').forEach((tab) => {
+          tab.hidden = !allowed.includes(tab.dataset.lab);
+        });
+        $('.lab-tabs').hidden = allowed.length === 1;
         window.selectLab?.(labButton.dataset.jumpLab);
+        demo.scrollIntoView({ behavior: motionAllowed() ? 'smooth' : 'instant', block: 'start' });
       });
     $('#copy-case-link').addEventListener('click', async () => {
       const url =
@@ -188,21 +162,22 @@
   }
   function fieldNote(note) {
     openReader(
-      `<header class="reader-hero"><p class="eyebrow">Field note / ${escape(note.category)}</p><h1 id="reader-title">${escape(note.title)}</h1><p class="reader-subtitle">${escape(note.intro)}</p></header><article class="note-body">${note.paragraphs.map((p, i) => `<p${i === 0 ? ' class="reader-intro"' : ''}>${escape(p)}</p>`).join('')}<div class="reader-actions"><a href="#project/${note.related}">Explore the related project ↗</a><a href="#notes" data-close-reader="#notes">All field notes →</a></div></article>`,
+      `<header class="reader-hero"><p class="eyebrow">Field note / ${escape(note.category)}</p><h1 id="reader-title">${escape(note.title)}</h1><p class="reader-subtitle">${escape(note.intro)}</p></header><article class="note-body">${note.paragraphs.map((p, i) => `<p${i === 0 ? ' class="reader-intro"' : ''}>${escape(p)}</p>`).join('')}<div class="reader-actions"><a href="#project/${note.related}">Explore the related project ↗</a><a href="#work" data-close-reader="#work">All projects →</a></div></article>`,
       note.title,
     );
     $('[data-close-reader]', reader).addEventListener('click', (e) => {
       e.preventDefault();
-      closeReader('#notes');
+      closeReader('#work');
     });
   }
   function colophon() {
     openReader(
-      `<header class="reader-hero"><p class="eyebrow">Colophon / About this site</p><h1 id="reader-title">Built around the work.</h1><p class="reader-subtitle">A portfolio should make reasoning easier to inspect.</p></header><article class="note-body"><p class="reader-intro">The visual language borrows from engineering drawings: boundaries, coordinates, signals, and deliberate annotations.</p><ul class="colophon-list"><li>Eight project stories separate public source evidence, supplied resume information, and architectural analysis.</li><li>Four browser labs illustrate delayed deletion, threshold evaluation, backpressure, and order-state transitions.</li><li>The hero is a procedural Canvas drawing. There are no stock photographs, remote fonts, tracking scripts, analytics, or third-party runtime libraries.</li><li>Theme preference is stored locally. Reduced-motion preferences are respected, and animation can be paused manually.</li><li>This portfolio was drafted and implemented with AI assistance from the supplied resume and public repositories. That does not imply AI was used in the original projects.</li><li>Reported benchmark results are attributed to the repository. Simulations are labeled and do not execute the original backends.</li><li>The site itself adds no visitor analytics. A hosting provider may maintain its own access logs.</li></ul><p>Content was prepared from the resume and public GitHub material inspected on 22 October 2026. Employer source code and nonpublic engineering details are not included.</p></article>`,
+      `<header class="reader-hero"><p class="eyebrow">Colophon / About this site</p><h1 id="reader-title">Built around the work.</h1><p class="reader-subtitle">A portfolio should make reasoning easier to inspect.</p></header><article class="note-body"><p class="reader-intro">The visual language borrows from engineering drawings: boundaries, coordinates, signals, and deliberate annotations.</p><p>Eight project stories explore design decisions, failure modes, and tradeoffs. Four interactive labs let you change a condition and follow the consequences.</p><p>The motion is drawn in Canvas. You can pause it, switch themes, or use your device’s reduced-motion setting.</p><p>Built with AI assistance, then checked against project code and reproducible tests. Read the field note for the process.</p><p>No visitor analytics or tracking scripts.</p></article>`,
       'About this site',
     );
   }
   function closeReader(target) {
+    parkDemos();
     if (reader.open) reader.close();
     document.body.style.overflow = '';
     document.title = originalTitle;
@@ -245,21 +220,10 @@
     } else if (hash === '#colophon') {
       colophon();
     } else if (reader.open) {
+      parkDemos();
       reader.close();
       document.body.style.overflow = '';
       document.title = originalTitle;
-    }
-    if (hash.startsWith('#term-')) {
-      const term = document.getElementById(hash.slice(1));
-      if (term?.classList.contains('term-card')) {
-        $('#glossary-search').value = '';
-        $$('.term-card').forEach((card) => (card.hidden = false));
-        $('#glossary-empty').hidden = true;
-        term.open = true;
-        requestAnimationFrame(() =>
-          term.scrollIntoView({ behavior: motionAllowed() ? 'smooth' : 'instant', block: 'start' }),
-        );
-      }
     }
     lastRoute = hash;
   }
@@ -286,7 +250,7 @@
     }
   });
   window.addEventListener('hashchange', handleRoute);
-  $('#open-colophon').addEventListener('click', () => {
+  $('#open-colophon')?.addEventListener('click', () => {
     location.hash = 'colophon';
   });
   document.addEventListener('click', (e) => {
@@ -297,32 +261,32 @@
     }
   });
   handleRoute();
+  window.openProjectDemo = (name) => {
+    const id = {
+      storage: 'snapshot-prune',
+      replay: 'event-engine',
+      queue: 'event-engine',
+      orders: 'order-agent',
+    }[name];
+    const project = data.projects.find((p) => p.id === id);
+    if (!project) return;
+    history.replaceState(null, '', '#project/' + id);
+    caseStudy(project);
+    $('[data-jump-lab]', reader)?.click();
+    window.selectLab?.(name);
+    lastRoute = location.hash;
+  };
 
   const searchItems = [
     ...data.projects.map((p) => ({
       title: p.short,
       kind: 'Project',
-      search: `${p.short} ${p.description} ${p.tech.join(' ')} ${p.sections.map((s) => s.join(' ')).join(' ')}`,
+      search: `${p.short} ${p.description} ${p.tech.join(' ')} ${p.sections.map((s) => s.join(' ')).join(' ')} ${terms
+        .filter((t) => t.project === p.id)
+        .map((t) => t.name)
+        .join(' ')}`,
       href: '#project/' + p.id,
     })),
-    ...data.notes.map((n) => ({
-      title: n.title,
-      kind: 'Field note',
-      search: n.title + ' ' + n.intro + ' ' + n.paragraphs.join(' '),
-      href: '#note/' + n.id,
-    })),
-    ...terms.map((t) => ({
-      title: t.name,
-      kind: 'Plain-English term',
-      search: [t.name, t.definition, t.example, t.group].join(' '),
-      href: '#term-' + t.id,
-    })),
-    {
-      title: 'The systems playground',
-      kind: 'Interactive labs',
-      search: 'lab simulation queue storage thresholds orders playground',
-      href: '#playground',
-    },
     {
       title: 'About & experience',
       kind: 'Background',

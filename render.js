@@ -18,7 +18,7 @@
     loop: '<div class="loop-rings"><i></i><i></i><i></i><i></i></div>',
     orders:
       '<div class="order-graphic"><span>GTC</span><span>GTT</span><span>IOC</span><span>FOK</span></div>',
-    ml: '<div class="ml-graphic">Define y.</div>',
+    ml: '<div class="ml-graphic">RoBERTa</div>',
     distributed:
       '<div class="nodes-graphic"><i></i><span>↔</span><i></i><span>↔</span><i></i></div>',
     compute:
@@ -29,7 +29,7 @@
     return items
       .map(
         (p) =>
-          `<article class="project-card reveal" data-category="${p.category}" aria-labelledby="card-${p.id}"><div class="project-visual"><div class="visual-grid" aria-hidden="true"></div><span class="visual-code">${p.number} / ${e(p.type.toUpperCase())}</span><div class="visual-center" aria-hidden="true">${graphics[p.visual]}</div><span class="visual-caption">${e(p.metricLabel)}</span></div><div class="project-info"><div class="project-meta"><span>${e(p.type)}</span><span class="project-evidence ${p.repo ? '' : 'resume'}">${e(p.evidence)} ${p.repo ? '↗' : '○'}</span></div><h3 id="card-${p.id}">${e(p.name)}</h3><div class="project-real-name">${e(p.short)}</div><p>${e(p.description)}</p><div class="project-tags">${p.tech.map((t) => `<span>${e(t)}</span>`).join('')}</div><a class="project-link" data-project-id="${p.id}" href="${portable ? '#project/' + p.id : 'projects/' + p.id + '/'}" aria-label="Read ${e(p.short)} case study">Inside the project <span>↗</span></a></div></article>`,
+          `<article class="project-card reveal" data-category="${p.category}" aria-labelledby="card-${p.id}"><div class="project-visual"><div class="visual-grid" aria-hidden="true"></div><span class="visual-code">${p.number} / ${e(p.type.toUpperCase())}</span><div class="visual-center" aria-hidden="true">${graphics[p.visual]}</div><span class="visual-caption">${e(p.metricLabel)}</span></div><div class="project-info"><div class="project-meta"><span>${e(p.type)}</span></div><h3 class="project-title" id="card-${p.id}">${e(p.name)}</h3><p class="project-tagline">${e(p.tagline)}</p><p>${e(p.description)}</p><div class="project-tags">${p.tech.map((t) => `<span>${e(t)}</span>`).join('')}</div><a class="project-link" data-project-id="${p.id}" href="${portable ? '#project/' + p.id : 'projects/' + p.id + '/'}" aria-label="Read ${e(p.short)} case study">View project <span>↗</span></a></div></article>`,
       )
       .join('');
   }
@@ -80,7 +80,7 @@
         ],
       ],
       caption:
-        'Conceptual view of the responsibilities described in the resume. Not an exact service topology or verified protocol.',
+        'Conceptual model: transactional metadata tracks logical references while the object store holds distinct physical lifetimes.',
     },
     loopbreaker: {
       lanes: [
@@ -107,7 +107,7 @@
         ],
       ],
       caption:
-        'The live-read path ends at mocked submission. This diagram does not imply signing, broadcast, or settlement.',
+        'Live quotes and balance reads feed order policies; the current submission path is mocked.',
     },
     sentiment: {
       lanes: [
@@ -123,7 +123,7 @@
         ],
       ],
       caption:
-        'Workflow described in the repository documentation. The diagram does not establish model quality or target validity.',
+        'Exploratory training workflow: transcript preparation, tokenization, validation, and model export.',
     },
     'distributed-storage': {
       lanes: [
@@ -139,7 +139,7 @@
         ],
       ],
       caption:
-        'Resume-based responsibilities and reported failure scenario. Exact topology and consistency protocol were not available.',
+        'Partitioned data movement and replicated metadata support recovery in the tested single-node failure scenario.',
     },
     'compute-platform': {
       roles: true,
@@ -151,7 +151,7 @@
         ],
       ],
       caption:
-        'Component roles from the resume. These are distinct responsibilities, not a claim about the cross-service commit protocol.',
+        'HDFS, Redis, and ZooKeeper divide durable storage, fast state access, and worker coordination.',
     },
     'distributed-training': {
       lanes: [
@@ -167,7 +167,7 @@
         ],
       ],
       caption:
-        'The walkthrough covers training and hosting configuration. No speedup or cost benchmark is implied.',
+        'A walkthrough from distributed training configuration to a hosted inference endpoint.',
     },
   };
   function architecture(id) {
@@ -177,7 +177,7 @@
   }
   function decisions(rows) {
     if (!rows?.length) return '';
-    return `<section class="decision-section"><h2>Design alternatives, compared</h2><p class="decision-context">Architectural analysis of the choices described above. These comparisons do not reconstruct undocumented decision history.</p><div class="decision-scroll"><table class="decision-table"><caption class="sr-only">Design choices, alternatives, and their tradeoffs</caption><thead><tr><th scope="col">Choice explored</th><th scope="col">Alternative</th><th scope="col">What changes</th></tr></thead><tbody>${rows.map((row) => `<tr>${row.map((cell) => `<td>${e(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table></div></section>`;
+    return `<section class="decision-section"><h2>Design alternatives, compared</h2><p class="decision-context">What each approach makes easier, and what it asks you to handle.</p><div class="decision-scroll"><table class="decision-table"><caption class="sr-only">Design choices, alternatives, and their tradeoffs</caption><thead><tr><th scope="col">Choice explored</th><th scope="col">Alternative</th><th scope="col">What changes</th></tr></thead><tbody>${rows.map((row) => `<tr>${row.map((cell) => `<td>${e(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table></div></section>`;
   }
   return { escape: e, projects, notes, glossary, architecture, decisions };
 });

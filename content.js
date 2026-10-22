@@ -9,10 +9,11 @@ window.PORTFOLIO = {
       category: 'systems',
       number: '01',
       type: 'Low-latency systems',
-      name: 'The fast path.\nThe full story.',
-      short: 'C++ Event Processing Engine',
+      name: 'Low-Latency C++ Event Processing Engine',
+      tagline: 'The fast path. The full story.',
+      short: 'Low-Latency C++ Event Processing Engine',
       description:
-        'A real-time risk engine where latency is measured, failures are replayable, and alerts explain themselves.',
+        'A C++17 event-processing backend with live and replayable inputs, explainable risk scoring, provider circuit breakers, and SQLite persistence paths.',
       tech: ['C++17', 'Concurrency', 'SQLite'],
       visual: 'engine',
       evidence: 'Public source',
@@ -20,9 +21,9 @@ window.PORTFOLIO = {
       metricLabel: 'Reported p99 · local decision path',
       repo: 'stablecoin_depeg_prediction_system',
       subtitle:
-        'Engineering a measurable, inspectable path from market observations to risk decisions.',
+        'Live feeds, deterministic replay, bounded handoff, and local performance benchmarks.',
       intro:
-        'The interesting part of this stablecoin project is the infrastructure around the signal: how an event crosses a thread boundary, how a failure becomes reproducible, and how a performance claim gets a precise scope.',
+        'I built this C++17 backend to process stablecoin price events from live providers and replay files. I separated data sources from scoring, added provider fault handling, and built tests and benchmarks around the processing path.',
       facts: [
         ['Language', 'C++17'],
         ['Handoff', 'Bounded SPSC queue'],
@@ -63,7 +64,6 @@ window.PORTFOLIO = {
           'A useful next study would vary producer rate, queue capacity, consumer pauses, history length, and hardware. It would report saturation, dropped or rejected events, and end-to-end tails separately. Predictive claims would need larger held-out historical datasets and explicit labeling rules.',
         ],
       ],
-      question: 'What happens to your latency promise when the consumer cannot keep up?',
       sources: [
         ['README & scope', 'README.md'],
         ['Queue implementation', 'include/util/lock_free_spsc_queue.hpp'],
@@ -81,18 +81,19 @@ window.PORTFOLIO = {
       category: 'systems',
       number: '02',
       type: 'Distributed storage',
-      name: 'Same bytes.\nDifferent lifetime.',
+      name: 'Live Snapshot Prune',
+      tagline: 'Same bytes. Different lifetime.',
       short: 'Live Snapshot Prune',
       description:
-        'Online garbage collection with concurrent uploads, restores, and deletions—and an ABA-style race hiding in the object identity.',
+        'A backup storage system with PostgreSQL metadata, snapshot APIs, independent object storage, and garbage collection that runs alongside uploads and restores.',
       tech: ['Python', 'PostgreSQL', 'Docker'],
       visual: 'storage',
       evidence: 'Resume project',
       metric: 'A₁ ≠ A₂',
-      metricLabel: 'Content identity is not object lifetime',
-      subtitle: 'Reclaiming unreferenced objects without confusing old work with new data.',
+      metricLabel: 'Concurrent uploads + online cleanup',
+      subtitle: 'Concurrent backup operations with online garbage collection and fault injection.',
       intro:
-        'A content hash answers “are these bytes the same?” A delayed delete needs a different answer: “is this still the physical object I intended to remove?” Live Snapshot Prune explores that distinction.',
+        'I designed a backup storage system with transactional metadata and an independent object store. The cleanup design distinguishes content hashes from physical object lifetimes so a delayed delete cannot remove a newly uploaded copy.',
       facts: [
         ['Metadata', 'Transactional PostgreSQL'],
         ['Data plane', 'Independent object storage'],
@@ -105,7 +106,7 @@ window.PORTFOLIO = {
           'A backup system cannot assume that the world stops during garbage collection. Uploads create data, snapshots acquire references, restores read objects, and deletions remove references. A collector can make a valid observation that becomes stale before its external delete actually takes effect.',
         ],
         [
-          'What the resume describes',
+          'How it fits together',
           'The project combines PostgreSQL metadata transactions, independent object storage, snapshot APIs, and online mark-and-sweep collection. Correctness mechanisms distinguish logical content identity from physical object incarnations. A verifier introduces faults across multiple services and validates end-state invariants.',
         ],
         [
@@ -125,11 +126,10 @@ window.PORTFOLIO = {
           'The resume reports fault injection for lost acknowledgements, process crashes, restart recovery, concurrent operations, and orphan reclamation. These cases are valuable because a timeout does not reveal whether a remote operation committed. The verifier also checks final invariants rather than treating a successful API response as sufficient evidence.',
         ],
         [
-          'What remains to verify',
-          'A public repository was not found on the supplied profile. The precise invariants, failure schedules, isolation level, object-store guarantees, and verifier logs should accompany a full technical review. The design story here is based on the resume, with conceptual analysis clearly separated from implementation evidence.',
+          'The next failure study',
+          'A deeper failure study should make the invariants explicit, vary operation schedules, and inspect recovery traces. The central questions are whether live data remains reachable, whether retries address the intended object, and whether orphan reclamation eventually makes progress.',
         ],
       ],
-      question: 'When a delete finally arrives, how does it prove which lifetime it belongs to?',
       sources: [],
       provenance:
         'Resume-based project, 2026. No public source repository was located. The race visualization is conceptual and does not execute the original services.',
@@ -140,19 +140,20 @@ window.PORTFOLIO = {
       category: 'product',
       number: '03',
       type: 'Product engineering',
-      name: 'An exit from\nthe infinite feed.',
+      name: 'Loopbreaker',
+      tagline: 'An exit from the infinite feed.',
       short: 'Loopbreaker',
       description:
-        'A browser extension that makes short-form video consumption visible, then adds a deliberate stopping point.',
+        'A browser extension that counts short-form videos and active watch time, saves sessions locally, and inserts pause points on Instagram and YouTube.',
       tech: ['JavaScript', 'Manifest V3', 'Browser APIs'],
       visual: 'loop',
       evidence: 'Public source',
       metric: 'Pause.',
-      metricLabel: 'A product built around intentional friction',
+      metricLabel: 'Watch counts + active time + pause points',
       repo: 'Loopbreaker',
-      subtitle: 'Reliable intervention starts with deciding what should count.',
+      subtitle: 'Browser-based watch tracking with local session recovery.',
       intro:
-        'A counter sounds simple until the same video appears in two interfaces, a refresh restores a session, or an inactive tab keeps accumulating time. Loopbreaker turns those small edge cases into product decisions.',
+        'I built Loopbreaker to track short-form viewing sessions and add stopping points. The extension handles duplicate videos, active-playback timing, and session recovery after a page refresh.',
       facts: [
         ['Surfaces', 'Instagram & YouTube web'],
         ['State', 'Per-platform localStorage'],
@@ -189,7 +190,6 @@ window.PORTFOLIO = {
           'The repository contains the extension manifest, content script, and overlay styling. It documents experimental limitations, browser-only support, platform DOM fragility, and no Chrome Web Store release. A sensible next step is a regression fixture suite for navigation, duplicate content, fullscreen, idle tabs, and refresh recovery.',
         ],
       ],
-      question: 'When the interface changes but the content does not, is that a new event?',
       sources: [
         ['Product writeup', 'README.md'],
         ['Counting & session logic', 'content.js'],
@@ -204,19 +204,20 @@ window.PORTFOLIO = {
       category: 'systems',
       number: '04',
       type: 'Execution infrastructure',
-      name: 'A quote is not\nan execution.',
+      name: 'Curve DEX Limit Order Agent',
+      tagline: 'A quote is not an execution.',
       short: 'Curve DEX Limit Order Agent',
       description:
-        'Explicit order lifetimes, liquidity checks, and deterministic policy scenarios around live Ethereum reads.',
+        'A C++ order agent with live Ethereum reads, four order policies, and an offline scenario harness. Transaction submission is mocked.',
       tech: ['C++17', 'JSON-RPC', 'State machines'],
       visual: 'orders',
       evidence: 'Public source',
       repo: 'curve_dex_limit-order-agent',
       metric: '4 policies',
       metricLabel: 'GTC · GTT · IOC · FOK',
-      subtitle: 'Separating market observation, order eligibility, and transaction execution.',
+      subtitle: 'GTC, GTT, IOC, and FOK policies with live RPC reads and mocked submission.',
       intro:
-        'The project goes beyond a swap call to ask when an order is eligible, how long it remains eligible, and what should happen when conditions are not met.',
+        'I implemented order eligibility, expiry, and liquidity checks around Ethereum RPC reads. A deterministic C++ harness exercises the four policies without credentials; the live-read path currently ends at mocked transaction submission.',
       facts: [
         ['Reads', 'Sepolia JSON-RPC'],
         ['Policies', 'GTC / GTT / IOC / FOK'],
@@ -249,7 +250,6 @@ window.PORTFOLIO = {
           'The fixture ends with one filled order, two cancellations, and one expiry. The repository documents missing persistence and simplified demo amount handling. A production path would need careful integer accounting, durable order state, secure key management, and idempotent reconciliation with on-chain outcomes.',
         ],
       ],
-      question: 'Which facts can change between deciding to execute and observing settlement?',
       sources: [
         ['Scope & limitations', 'README.md'],
         ['Policy harness', 'offline_limit_order_terminal.cpp'],
@@ -264,19 +264,20 @@ window.PORTFOLIO = {
       category: 'ml',
       number: '05',
       type: 'Applied machine learning',
-      name: 'A score needs\na meaningful target.',
+      name: 'Interview Sentiment with RoBERTa',
+      tagline: 'Interview transcripts, transformer models.',
       short: 'Interview Sentiment with RoBERTa',
       description:
-        'An exploratory NLP notebook—and the harder question of what an interview sentiment score actually measures.',
+        'An exploratory RoBERTa notebook for preparing interview transcripts and testing sentiment-related scoring.',
       tech: ['Python', 'PyTorch', 'RoBERTa'],
       visual: 'ml',
       evidence: 'Exploratory notebook',
       repo: 'sentiment-analysis',
       metric: 'Define y.',
-      metricLabel: 'Evaluation starts with the target',
-      subtitle: 'Moving from pretrained sentiment to a domain-specific evaluation problem.',
+      metricLabel: 'Interview transcript sentiment prototype',
+      subtitle: 'Exploratory transcript preparation and RoBERTa training setup.',
       intro:
-        'The model architecture is only part of an ML project. Dataset construction, target definition, and validation determine whether the output has useful meaning.',
+        'I explored adapting a pretrained Twitter-RoBERTa sentiment model to interview transcripts. The notebook covers transcript preparation, tokenization, and training setup; reproducible labeling and a complete evaluated training run remain follow-up work.',
       facts: [
         ['Model family', 'RoBERTa'],
         ['Data', 'startup-interviews'],
@@ -309,7 +310,6 @@ window.PORTFOLIO = {
           'First replace local paths and placeholder targets with reproducible data-and-label preparation. Then construct a proper labeled training dataset, establish a manually reviewed target definition and held-out split, compare against a simple baseline, and inspect error slices. That would make a fine-tuning result more informative than a model name or a single aggregate score.',
         ],
       ],
-      question: 'What exactly is the ground truth, and would a different reviewer agree with it?',
       sources: [
         ['Workflow documentation', 'README.md'],
         ['Public notebook', 'test1%20sentiment.ipynb'],
@@ -322,18 +322,19 @@ window.PORTFOLIO = {
       category: 'systems',
       number: '06',
       type: 'Distributed systems',
-      name: 'Keep the data\nmoving.',
+      name: 'Distributed Storage Engine',
+      tagline: 'Keep the data moving.',
       short: 'Distributed Storage Engine',
       description:
-        'Kafka-based ingestion and partitioned communication, replicated metadata, and single-node failure recovery.',
+        'Multi-node storage with Kafka-based ingestion, partitioned communication, parallel consumers, replicated metadata, and recovery from tested single-node failures.',
       tech: ['Apache Kafka', 'Replication', 'Fault tolerance'],
       visual: 'distributed',
       evidence: 'Resume project',
       metric: 'Recover.',
-      metricLabel: 'Availability needs a failure model',
-      subtitle: 'Exploring durable movement, replication, and recovery across nodes.',
+      metricLabel: 'Replicated metadata + single-node recovery',
+      subtitle: 'Kafka ingestion, replicated metadata, and single-node recovery.',
       intro:
-        'A distributed storage project is most interesting at the moment a node disappears: what remains readable, what was acknowledged, and what must be reconstructed?',
+        'I built a multi-node storage system using Kafka for ingestion and inter-node data movement. Replicated metadata and dual-storage fault tolerance kept data accessible during tested single-node failures.',
       facts: [
         ['Period', 'Jul–Nov 2023'],
         ['Messaging', 'Apache Kafka'],
@@ -346,24 +347,22 @@ window.PORTFOLIO = {
           'A multi-node storage system needs scalable ingestion and durable inter-node communication while retaining access to data during failures.',
         ],
         [
-          'The implementation described',
-          'The resume reports Kafka-based ingestion, topic partitioning, parallel consumers, replicated metadata, and dual-storage fault-tolerance mechanisms. Tested single-node failures retained data access and supported recovery.',
+          'How it fits together',
+          'Kafka handles ingestion and partitioned inter-node communication. Parallel consumers move data between storage nodes, while replicated metadata and dual-storage fault-tolerance mechanisms support recovery. Tested single-node failures retained data access.',
         ],
         [
           'The tradeoff',
           'Partitions enable parallel processing, while ordering remains a per-partition property that the application must use deliberately. Replication adds storage and synchronization work. These are architectural implications; the resume does not establish the exact placement or consistency protocol.',
         ],
         [
-          'Evidence and limits',
-          'The resume reports throughput and latency improvements without numeric results or a benchmark protocol. A public repository was not found on the supplied profile. It would be useful to publish a topology, acknowledgement contract, failure matrix, and reproducible workload.',
+          'A useful follow-up',
+          'A reproducible workload would make it possible to compare throughput, transfer latency, and recovery time under the same conditions. A failure matrix should connect each injected fault to the acknowledgement contract and the data guarantees that remain intact.',
         ],
         [
           'The review question',
           'Single-node survival is one useful failure case. It does not establish behavior under split-brain coordination, simultaneous failures, disk corruption, or network partitions. A precise availability claim should name the failures tested and the data guarantees preserved.',
         ],
       ],
-      question:
-        'What does a successful write response guarantee when a replica fails one instant later?',
       sources: [],
       provenance:
         'Based on the supplied resume. No public implementation or benchmark trace was located.',
@@ -373,18 +372,19 @@ window.PORTFOLIO = {
       category: 'systems',
       number: '07',
       type: 'Distributed orchestration',
-      name: 'Coordinate\nthe moving parts.',
-      short: 'Distributed Compute Orchestration',
+      name: 'Distributed Compute Orchestration Platform',
+      tagline: 'Tasks, state, and worker coordination.',
+      short: 'Distributed Compute Orchestration Platform',
       description:
-        'Multi-node task execution with HDFS, Redis, and ZooKeeper handling different parts of distributed state.',
+        'Multi-node task orchestration with HDFS for durable data, Redis for fast state access, and ZooKeeper for worker coordination.',
       tech: ['HDFS', 'Redis', 'ZooKeeper'],
       visual: 'compute',
       evidence: 'Resume project',
       metric: 'State.',
-      metricLabel: 'Different roles, different guarantees',
-      subtitle: 'Separating durable data, low-latency state, and coordination.',
+      metricLabel: 'HDFS + Redis + ZooKeeper',
+      subtitle: 'Distributed task execution with durable data and coordinated workers.',
       intro:
-        'A distributed workflow is a conversation between components with different failure and persistence behavior. Assigning each one a clear role is the beginning of the design.',
+        'I built distributed execution infrastructure for coordinating tasks across worker nodes. I integrated HDFS for durable storage, Redis for state and caching, and ZooKeeper for coordination.',
       facts: [
         ['Period', 'Dec 2023–Apr 2024'],
         ['Durable storage', 'HDFS'],
@@ -397,8 +397,8 @@ window.PORTFOLIO = {
           'Multi-node execution requires coordination, distributed state, and a way to move durable data through worker pipelines.',
         ],
         [
-          'The implementation described',
-          'The resume describes a compute orchestration platform integrating HDFS for durable storage, Redis for low-latency state and cache access, and ZooKeeper for coordination across workers.',
+          'How it fits together',
+          'HDFS provides durable storage, Redis handles low-latency state and cache access, and ZooKeeper coordinates work across nodes. Each component has a distinct responsibility in the execution pipeline.',
         ],
         [
           'The tradeoff',
@@ -409,12 +409,10 @@ window.PORTFOLIO = {
           'The resume does not specify task delivery guarantees, duplicate-execution handling, worker fencing, or the source of truth for completion state. Those details determine whether retries are safe and whether abandoned work can be reassigned.',
         ],
         [
-          'Evidence and limits',
-          'Reliability and pipeline optimization are reported qualitatively. No repository or quantitative benchmark was located on the supplied GitHub profile. The natural next artifact is a task lifecycle and failure-recovery trace.',
+          'A useful follow-up',
+          'A task lifecycle trace would connect assignment, execution, completion, and recovery. Running that trace through worker crashes and coordination loss would reveal where the workflow needs fencing, reconciliation, or an explicit retry policy.',
         ],
       ],
-      question:
-        'If a worker loses coordination but keeps running, who is still allowed to commit the result?',
       sources: [],
       provenance:
         'Based on the supplied resume. Architecture tradeoffs are analysis, not verified implementation details.',
@@ -424,19 +422,20 @@ window.PORTFOLIO = {
       category: 'ml',
       number: '08',
       type: 'ML infrastructure',
-      name: 'More workers.\nMore questions.',
+      name: 'Distributed TensorFlow Training',
+      tagline: 'From training to hosted inference.',
       short: 'Distributed TensorFlow Training',
       description:
-        'A SageMaker walkthrough connecting distributed data-parallel training to hosted inference and cleanup.',
+        'A TensorFlow/SageMaker walkthrough covering distributed training configuration, model deployment, inference, and resource cleanup.',
       tech: ['TensorFlow', 'SageMaker', 'MNIST'],
       visual: 'training',
       evidence: 'Public walkthrough',
       repo: 'aws-tensorflow',
       metric: 'Scale?',
-      metricLabel: 'Measure before adding workers',
-      subtitle: 'Connecting a model training script to a managed distributed runtime.',
+      metricLabel: 'Training configuration → hosted inference',
+      subtitle: 'TensorFlow distribution and deployment on SageMaker.',
       intro:
-        'Distributed training is a systems topic as much as a machine-learning topic: workers need a coherent strategy, and faster compute has to justify communication and startup costs.',
+        'I documented a TensorFlow-on-SageMaker workflow from training configuration through hosted inference and cleanup. The walkthrough uses MNIST and covers the estimator and distribution settings needed to launch a managed training job.',
       facts: [
         ['Framework', 'TensorFlow 2'],
         ['Runtime', 'SageMaker distributed'],
@@ -465,8 +464,6 @@ window.PORTFOLIO = {
           'Hold the target quality and dataset fixed, compare one worker with several, and report both wall-clock time and total compute cost. That reveals whether scaling improved the actual objective.',
         ],
       ],
-      question:
-        'Did another worker improve time to useful model quality, or just increase the bill?',
       sources: [['Walkthrough & notebook', 'README.md']],
       provenance:
         'Based on public repository documentation. No cloud training or deployment job was run for this portfolio.',
@@ -523,7 +520,7 @@ window.PORTFOLIO = {
         'How AI assistance helped build this portfolio—and where the output needed a closer look.',
       paragraphs: [
         'This portfolio was built with AI assistance from a supplied resume and public GitHub repositories. The useful output includes more than styling: project narratives, interactive explanations, a static export, and a testable implementation. The important constraint was to keep each claim connected to evidence.',
-        'Source inspection changed the story in concrete ways. The order agent has live reads but mocked transaction submission, so the site does not describe it as a working on-chain execution bot. The sentiment notebook contains local setup and placeholder targets, so it is presented as an exploratory prototype. The two resume variants also had different defect counts; the site avoids repeating those disputed numbers.',
+        'Source inspection changed the story in concrete ways. The order agent has live reads but mocked transaction submission, so the site does not describe it as a working on-chain execution bot. The sentiment notebook contains local setup and placeholder targets, so it is presented as an exploratory prototype. The resume now follows the latest LaTeX supplied by Harshvardhan, including the updated experience figures.',
         'The interactive demonstrations were checked against their boundaries. The replay scoring rule was ported to JavaScript and all nine fixture scores were compared against the original C++ RiskEngine to within 1e-10. The original C++ order-policy harness was compiled and run to cross-check the browser state sequence. Storage and queue demonstrations remain explicitly labeled conceptual models.',
         'Automated checks cover the lab invariants, navigation, filtering, search, direct project links, and portable export. Separate static checks inspect local links, headings, metadata, and accessibility rules that can be evaluated without browser layout. These checks are useful, but they do not establish that the full page has been visually reviewed on every device.',
         'The site is deliberately portable: ordinary HTML, CSS, JavaScript, a zero-dependency static build, and a single-file edition. Generating those files is separate from publishing a working public URL. Ownership of the files makes future changes and moving between hosts easier.',
